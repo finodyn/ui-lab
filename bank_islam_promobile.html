@@ -38,11 +38,11 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .fn span{font-size:10px;font-weight:700;color:#AAAAAA;}
 .fn.active span{color:var(--red);}
 .fn-bw{position:relative;}
-.fn-badge{position:absolute;top:-2px;right:-2px;background:var(--red);color:white;font-size:8px;font-weight:800;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid white;}
+.fn-badge{position:absolute;top:-2px;right:-2px;background:var(--red);color:white;font-size:8px;font-weight:600;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid white;}
 
 /* TYPOGRAPHY */
 .eyebrow{font-size:12px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.8px;}
-.section-hd{font-size:22px;font-weight:900;letter-spacing:-0.5px;color:var(--txt);padding:20px 24px 10px;}
+.section-hd{font-size:22px;font-weight:700;letter-spacing:-0.5px;color:var(--txt);padding:20px 24px 10px;}
 
 /* PILL BUTTONS */
 .pill{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:var(--font);transition:opacity 0.15s,transform 0.1s;white-space:nowrap;}
@@ -64,10 +64,10 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .acc-nm{font-size:14px;font-weight:700;color:var(--txt);}
 .acc-num{font-size:11px;color:var(--txt3);margin-top:1px;}
 .acc-bal{text-align:right;}
-/* INLINE amount: RM and number same line */
+/* INLINE amount: RM and number always same size and weight */
 .amt-inline{display:flex;align-items:baseline;gap:3px;justify-content:flex-end;}
-.amt-currency{font-size:13px;font-weight:700;color:var(--txt);}
-.amt-value{font-size:15px;font-weight:800;color:var(--txt);letter-spacing:-0.3px;}
+.amt-currency{font-size:15px;font-weight:600;color:var(--txt);}
+.amt-value{font-size:15px;font-weight:600;color:var(--txt);letter-spacing:-0.3px;}
 .amt-sub{font-size:11px;color:var(--txt3);}
 
 /* TXN ROW — Wise style: no category label, company name + inline date/time */
@@ -89,7 +89,7 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .task-card-ico{width:42px;height:42px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .task-card-ico svg{width:20px;height:20px;stroke:var(--txt);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .task-card-inf{flex:1;}
-.task-card-title{font-size:15px;font-weight:800;color:var(--txt);margin-bottom:3px;}
+.task-card-title{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:3px;}
 .task-card-sub{font-size:13px;color:var(--txt2);line-height:1.4;margin-bottom:12px;}
 .task-card-actions{display:flex;gap:8px;}
 
@@ -101,13 +101,13 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .apv-tag.bp{background:#EAF3FD;color:#1570B8;}
 .apv-tag.rt{background:#F0EAFD;color:#6B3FB5;}
 .apv-pend{font-size:12px;font-weight:600;color:#E6A817;}
-.apv-name{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-0.3px;margin-bottom:2px;}
+.apv-name{font-size:17px;font-weight:600;color:var(--txt);letter-spacing:-0.3px;margin-bottom:2px;}
 .apv-bank{font-size:12px;color:var(--txt3);margin-bottom:3px;}
 .apv-by{font-size:11px;color:var(--txt3);margin-bottom:14px;}
 .apv-foot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid #F0F0F0;}
 .apv-amount{display:flex;align-items:baseline;gap:4px;}
-.apv-amount .amt-currency{font-size:15px;font-weight:700;}
-.apv-amount .amt-value{font-size:22px;font-weight:900;letter-spacing:-0.8px;}
+.apv-amount .amt-currency{font-size:18px;font-weight:600;}
+.apv-amount .amt-value{font-size:18px;font-weight:600;letter-spacing:-0.5px;}
 .apv-btns{display:flex;gap:8px;}
 .btn-rej{padding:9px 16px;border-radius:100px;border:1.5px solid #E0E0E0;background:white;font-size:13px;font-weight:700;color:var(--txt2);cursor:pointer;font-family:var(--font);}
 .btn-apv{padding:9px 16px;border-radius:100px;border:none;background:var(--red);font-size:13px;font-weight:700;color:white;cursor:pointer;font-family:var(--font);}
@@ -118,25 +118,25 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .sheet{background:white;border-radius:32px 32px 0 0;padding:0 24px 36px;width:100%;transform:translateY(100%);transition:transform 0.36s cubic-bezier(0.34,1.3,0.64,1);}
 .overlay.show .sheet{transform:translateY(0);}
 .sheet-handle{width:40px;height:5px;background:#E5E5E5;border-radius:3px;margin:14px auto 22px;}
-.sheet-title{font-size:22px;font-weight:900;letter-spacing:-0.5px;margin-bottom:4px;}
+.sheet-title{font-size:22px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px;}
 .sheet-sub{font-size:14px;color:var(--txt3);margin-bottom:20px;}
 
 /* TOTP */
 .totp-box{background:#F9F9F9;border-radius:18px;padding:18px;text-align:center;margin-bottom:20px;}
 .totp-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--txt3);margin-bottom:6px;}
 .totp-val-row{display:flex;align-items:baseline;gap:4px;justify-content:center;}
-.totp-val-cur{font-size:18px;font-weight:700;color:var(--txt);}
-.totp-val-num{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--txt);}
+.totp-val-cur{font-size:22px;font-weight:600;color:var(--txt);}
+.totp-val-num{font-size:22px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);}
 .totp-rcp{font-size:13px;color:var(--txt3);margin-top:3px;}
 .totp-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .totp-clbl{font-size:13px;font-weight:700;color:var(--txt);}
 .totp-tmr{font-size:13px;font-weight:700;color:var(--red);}
 .totp-digits{display:flex;gap:8px;justify-content:center;margin-bottom:10px;}
-.td{flex:1;height:54px;background:#F5F5F5;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
+.td{flex:1;height:54px;background:#F5F5F5;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
 .td.flash{background:var(--red-l);}
 .totp-prog{height:4px;background:#EFEFEF;border-radius:2px;margin-bottom:22px;overflow:hidden;}
 .totp-prog-fill{height:100%;background:var(--red);border-radius:2px;transition:width 1s linear;}
-.btn-full{width:100%;padding:17px;border-radius:100px;border:none;background:var(--red);color:white;font-size:16px;font-weight:800;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;transition:opacity 0.15s,transform 0.1s;}
+.btn-full{width:100%;padding:17px;border-radius:100px;border:none;background:var(--red);color:white;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;transition:opacity 0.15s,transform 0.1s;}
 .btn-full:active{transform:scale(0.98);}
 
 /* SOFT TOKEN FULL SCREEN */
@@ -144,25 +144,25 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .soft-token-screen.show{opacity:1;pointer-events:all;}
 .st-header{background:var(--red);padding:52px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:4px;}
 .st-header-title{color:white;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;opacity:0.75;}
-.st-header-name{color:white;font-size:18px;font-weight:900;margin-top:2px;letter-spacing:-0.3px;}
+.st-header-name{color:white;font-size:18px;font-weight:700;margin-top:2px;letter-spacing:-0.3px;}
 .st-header-bank{color:rgba(255,255,255,0.65);font-size:12px;}
 .st-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;}
 .st-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--txt3);margin-bottom:14px;}
 .st-code-row{display:flex;gap:10px;justify-content:center;margin-bottom:18px;}
-.st-digit{width:48px;height:60px;background:#F5F5F5;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
+.st-digit{width:48px;height:60px;background:#F5F5F5;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
 .st-digit.flash{background:var(--red-l);}
 .st-ring{position:relative;width:80px;height:80px;margin:0 auto 16px;}
 .st-ring svg{width:80px;height:80px;transform:rotate(-90deg);}
 .st-ring-bg{fill:none;stroke:#F0F0F0;stroke-width:6;}
 .st-ring-fill{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-dasharray:220;transition:stroke-dashoffset 1s linear;}
-.st-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--txt);}
+.st-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--txt);}
 .st-hint{font-size:13px;color:var(--txt3);text-align:center;line-height:1.5;max-width:220px;margin-top:4px;}
 .st-txn-box{background:#F9F9F9;border-radius:18px;padding:16px 20px;width:100%;margin-top:24px;}
 .st-txn-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .st-txn-row:last-child{margin-bottom:0;padding-top:8px;border-top:1px solid #EBEBEB;margin-top:8px;}
 .st-txn-lbl{font-size:12px;color:var(--txt3);font-weight:500;}
 .st-txn-val{font-size:13px;font-weight:700;color:var(--txt);}
-.st-txn-val.big{font-size:18px;font-weight:900;letter-spacing:-0.5px;}
+.st-txn-val.big{font-size:18px;font-weight:700;letter-spacing:-0.5px;}
 .st-footer{padding:0 28px 40px;}
 
 /* SUCCESS */
@@ -170,7 +170,7 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .succ.show{opacity:1;pointer-events:all;}
 .succ-ico{width:88px;height:88px;border-radius:50%;background:#E7FAF1;display:flex;align-items:center;justify-content:center;}
 .succ-ico svg{width:44px;height:44px;stroke:#12A05C;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-.succ h2{font-size:26px;font-weight:900;letter-spacing:-0.6px;color:var(--txt);}
+.succ h2{font-size:26px;font-weight:700;letter-spacing:-0.6px;color:var(--txt);}
 .succ p{font-size:15px;color:var(--txt3);text-align:center;line-height:1.5;max-width:250px;}
 .succ .ref{font-size:12px;color:var(--txt3);background:#F5F5F5;padding:7px 16px;border-radius:100px;font-weight:600;}
 
@@ -188,13 +188,13 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .biz-tile-ico.g svg{stroke:#12A05C;}
 .biz-tile-ico.p{background:#F0EAFD;}
 .biz-tile-ico.p svg{stroke:#6B3FB5;}
-.biz-tile-nm{font-size:14px;font-weight:800;color:var(--txt);line-height:1.2;}
+.biz-tile-nm{font-size:14px;font-weight:600;color:var(--txt);line-height:1.2;}
 .biz-tile-ds{font-size:11px;color:var(--txt3);line-height:1.4;}
 
 /* STAT */
 .stat{flex:1;background:white;border-radius:18px;padding:14px;}
 .stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--txt3);margin-bottom:5px;}
-.stat-val{font-size:18px;font-weight:900;letter-spacing:-0.6px;color:var(--txt);}
+.stat-val{font-size:18px;font-weight:700;letter-spacing:-0.6px;color:var(--txt);}
 .stat-sub{font-size:11px;color:var(--txt3);margin-top:2px;font-weight:500;}
 
 /* OUTLET BAR */
@@ -203,8 +203,8 @@ html,body{font-family:var(--font);background:#CACACA;display:flex;justify-conten
 .ob-top{display:flex;justify-content:space-between;margin-bottom:5px;}
 .ob-nm{font-size:13px;font-weight:600;color:var(--txt);}
 .ob-val-row{display:flex;align-items:baseline;gap:2px;}
-.ob-val-cur{font-size:11px;font-weight:700;color:var(--txt);}
-.ob-val-num{font-size:13px;font-weight:800;color:var(--txt);}
+.ob-val-cur{font-size:13px;font-weight:600;color:var(--txt);}
+.ob-val-num{font-size:13px;font-weight:600;color:var(--txt);}
 .ob-track{height:6px;background:#F0F0F0;border-radius:3px;overflow:hidden;}
 .ob-fill{height:100%;border-radius:3px;}
 
@@ -249,20 +249,20 @@ select.input-field{appearance:none;cursor:pointer;}
 /* DUITNOW */
 .duitnow-card{margin:0 24px;background:white;border-radius:24px;border:2px solid #F0F0F0;overflow:hidden;}
 .duitnow-header{background:var(--red);padding:18px;display:flex;flex-direction:column;align-items:center;gap:4px;}
-.duitnow-logo-text{color:white;font-size:15px;font-weight:900;letter-spacing:-0.3px;display:flex;align-items:center;gap:6px;}
+.duitnow-logo-text{color:white;font-size:15px;font-weight:700;letter-spacing:-0.3px;display:flex;align-items:center;gap:6px;}
 .duitnow-type{color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
 .duitnow-qr-area{padding:20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
-.duitnow-merchant{font-size:15px;font-weight:800;color:var(--txt);text-align:center;}
+.duitnow-merchant{font-size:15px;font-weight:600;color:var(--txt);text-align:center;}
 .duitnow-bank{font-size:12px;color:var(--txt3);text-align:center;}
 .duitnow-footer{background:#F9F9F9;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #F0F0F0;}
 
 /* PROFILE */
-.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:white;margin:0 auto 12px;}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white;margin:0 auto 12px;}
 
 .spacer-nav{height:88px;flex-shrink:0;}
 
 /* CASHIER AVATAR */
-.cashier-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:white;flex-shrink:0;}
+.cashier-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:white;flex-shrink:0;}
 
 /* ACCOUNT CARD — card style like dribbble ref */
 .acct-card{
@@ -280,15 +280,15 @@ select.input-field{appearance:none;cursor:pointer;}
 .acct-card-secondary .acct-card-type{color:rgba(255,255,255,0.8);}
 .acct-card-bal-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
 .acct-card-bal{display:flex;align-items:baseline;gap:4px;}
-.acct-card-bal-cur{font-size:18px;font-weight:700;}
-.acct-card-bal-num{font-size:30px;font-weight:900;letter-spacing:-1.2px;line-height:1;}
+.acct-card-bal-cur{font-size:24px;font-weight:600;}
+.acct-card-bal-num{font-size:24px;font-weight:600;letter-spacing:-0.5px;line-height:1;}
 .acct-card-primary .acct-card-bal-cur,.acct-card-primary .acct-card-bal-num{color:white;}
 .acct-card-secondary .acct-card-bal-cur,.acct-card-secondary .acct-card-bal-num{color:white;}
 .acct-card-eye{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;flex-shrink:0;}
 .acct-card-eye svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .acct-card-foot{display:flex;justify-content:space-between;align-items:flex-end;}
 .acct-card-acc-lbl{font-size:10px;font-weight:600;opacity:0.6;}
-.acct-card-acc-num{font-size:14px;font-weight:800;letter-spacing:1px;}
+.acct-card-acc-num{font-size:14px;font-weight:600;letter-spacing:1px;}
 .acct-card-primary .acct-card-acc-lbl,.acct-card-primary .acct-card-acc-num{color:white;}
 .acct-card-secondary .acct-card-acc-lbl,.acct-card-secondary .acct-card-acc-num{color:white;}
 /* decorative circle */
@@ -319,7 +319,7 @@ select.input-field{appearance:none;cursor:pointer;}
 .login-screen.active{display:flex;}
 .login-hero{background:var(--red);padding:52px 28px 40px;flex-shrink:0;}
 .login-hero-eyebrow{color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
-.login-hero-title{color:white;font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:6px;}
+.login-hero-title{color:white;font-size:30px;font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:6px;}
 .login-hero-sub{color:rgba(255,255,255,0.65);font-size:14px;}
 /* full page scroll — hero + form scroll together */
 .login-scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
@@ -330,7 +330,7 @@ select.input-field{appearance:none;cursor:pointer;}
 .login-input{width:100%;padding:16px 18px;border-radius:16px;border:1.5px solid #E8E8E8;font-family:var(--font);font-size:15px;font-weight:600;color:var(--txt);background:#F9F9F9;outline:none;transition:border-color 0.2s,background 0.2s;}
 .login-input:focus{border-color:var(--red);background:white;}
 .login-input::placeholder{color:#BBBBBB;font-weight:500;}
-.login-btn-main{width:100%;padding:18px;border-radius:100px;border:none;background:var(--red);color:white;font-size:17px;font-weight:800;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;margin-bottom:20px;transition:opacity 0.15s,transform 0.1s;}
+.login-btn-main{width:100%;padding:18px;border-radius:100px;border:none;background:var(--red);color:white;font-size:17px;font-weight:600;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;margin-bottom:20px;transition:opacity 0.15s,transform 0.1s;}
 .login-btn-main:active{transform:scale(0.98);}
 .login-divider{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
 .login-divider span{font-size:13px;color:var(--txt3);white-space:nowrap;}
@@ -430,7 +430,7 @@ select.input-field{appearance:none;cursor:pointer;}
     <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:16px 24px 0;">
       <div>
         <div style="font-size:13px;font-weight:500;color:var(--txt3);margin-bottom:2px;">Peace be upon you,</div>
-        <div style="font-size:20px;font-weight:900;letter-spacing:-0.5px;color:var(--txt);">Encik Ahmad Razif</div>
+        <div style="font-size:20px;font-weight:700;letter-spacing:-0.5px;color:var(--txt);">Encik Ahmad Razif</div>
         <div style="font-size:11px;color:var(--txt3);margin-top:2px;">BIZ-001234</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
@@ -439,18 +439,17 @@ select.input-field{appearance:none;cursor:pointer;}
           <div style="position:absolute;top:-1px;right:-1px;width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--bg);"></div>
         </div>
         <!-- AR avatar -->
-        <div onclick="showScreen('s-more')" style="width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:white;cursor:pointer;letter-spacing:-0.5px;">AR</div>
+        <div onclick="showScreen('s-more')" style="width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;cursor:pointer;letter-spacing:-0.5px;">AR</div>
       </div>
     </div>
 
     <!-- Balance -->
     <div style="padding:18px 24px 0;">
-      <div class="eyebrow" style="margin-bottom:6px;">Total balance</div>
-      <div style="display:flex;align-items:baseline;gap:4px;">
-        <span style="font-size:20px;font-weight:700;color:var(--txt);">RM</span>
-        <span style="font-size:42px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--txt);">1,247,892.50</span>
+      <div style="font-size:13px;font-weight:500;color:var(--txt3);margin-bottom:6px;">Total balance</div>
+      <div style="display:flex;align-items:baseline;gap:3px;">
+        <span style="font-size:28px;font-weight:600;color:var(--txt);">RM</span>
+        <span style="font-size:28px;font-weight:600;letter-spacing:-0.5px;line-height:1;color:var(--txt);">892,400.00</span>
       </div>
-      <div style="font-size:13px;color:var(--txt3);margin-top:5px;">Current Account · •••• 4821</div>
     </div>
 
     <!-- 3 action pills — More removed -->
@@ -464,36 +463,35 @@ select.input-field{appearance:none;cursor:pointer;}
     </div>
 
     <!-- Single account card -->
-    <div style="padding:16px 0 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:0 24px 10px;">
-        <div style="font-size:13px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;">My Account</div>
-        <div style="font-size:13px;font-weight:700;color:var(--red);cursor:pointer;" onclick="showScreen('s-accounts')">View details</div>
-      </div>
-      <div style="padding:0 16px;">
-        <div class="acct-card acct-card-primary" onclick="showScreen('s-accounts')">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
-            <div>
-              <div class="acct-card-label">Current Account</div>
-              <div class="acct-card-type">Wadiah · Active</div>
-            </div>
+    <div style="padding:16px 16px 0;">
+      <div class="acct-card acct-card-primary" onclick="showScreen('s-accounts')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <div>
+            <div class="acct-card-label">Current Account</div>
+            <div class="acct-card-type">Wadiah · Active</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="acct-card-eye" onclick="event.stopPropagation();showQR('static')" title="View QR">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h2M14 17h2M16 14v2M19 14v5M19 17h-3"/></svg>
+            </button>
             <button class="acct-card-eye" onclick="event.stopPropagation();toggleBalance(0)" id="eyeBtn0">
               <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </button>
           </div>
-          <div class="acct-card-bal-row">
-            <div class="acct-card-bal" id="balDisplay0">
-              <span class="acct-card-bal-cur">RM</span>
-              <span class="acct-card-bal-num">892,400.00</span>
-            </div>
+        </div>
+        <div class="acct-card-bal-row">
+          <div class="acct-card-bal" id="balDisplay0">
+            <span class="acct-card-bal-cur">RM</span>
+            <span class="acct-card-bal-num">892,400.00</span>
           </div>
-          <div class="acct-card-foot">
-            <div>
-              <div class="acct-card-acc-lbl">Account number</div>
-              <div class="acct-card-acc-num" style="letter-spacing:1.5px;font-size:13px;">1234 5678 9012 4821</div>
-            </div>
-            <div style="opacity:0.5;">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="4" width="8" height="8" fill="white" rx="1"/><rect x="18" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="20" y="4" width="8" height="8" fill="white" rx="1"/><rect x="2" y="18" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="20" width="8" height="8" fill="white" rx="1"/><rect x="18" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="18" y="25" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="25" width="5" height="5" fill="white" rx="0.5"/></svg>
-            </div>
+        </div>
+        <div class="acct-card-foot">
+          <div>
+            <div class="acct-card-acc-lbl">Account number</div>
+            <div class="acct-card-acc-num" style="letter-spacing:1.5px;font-size:13px;">1234 5678 9012 4821</div>
+          </div>
+          <div style="opacity:0.5;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="4" width="8" height="8" fill="white" rx="1"/><rect x="18" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="20" y="4" width="8" height="8" fill="white" rx="1"/><rect x="2" y="18" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="20" width="8" height="8" fill="white" rx="1"/><rect x="18" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="18" y="25" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="25" width="5" height="5" fill="white" rx="0.5"/></svg>
           </div>
         </div>
       </div>
@@ -525,7 +523,7 @@ select.input-field{appearance:none;cursor:pointer;}
           <div class="txn-meta">Today <div class="txn-dot"></div> 9:14 AM</div>
         </div>
         <div class="txn-amt">
-          <div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">48,000.00</span></div>
+          <div class="amt-inline"><span class="amt-currency dr">−RM</span><span class="amt-value dr">48,000.00</span></div>
           <small>Approved</small>
         </div>
       </div>
@@ -536,7 +534,7 @@ select.input-field{appearance:none;cursor:pointer;}
           <div class="txn-meta">Today <div class="txn-dot"></div> 8:52 AM</div>
         </div>
         <div class="txn-amt">
-          <div class="amt-inline"><span class="amt-currency cr" style="font-size:13px;">+RM</span><span class="amt-value cr">3,240.00</span></div>
+          <div class="amt-inline"><span class="amt-currency cr">+RM</span><span class="amt-value cr">3,240.00</span></div>
           <small>Received</small>
         </div>
       </div>
@@ -547,7 +545,7 @@ select.input-field{appearance:none;cursor:pointer;}
           <div class="txn-meta">Yesterday <div class="txn-dot"></div> 5:00 PM</div>
         </div>
         <div class="txn-amt">
-          <div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">125,400.00</span></div>
+          <div class="amt-inline"><span class="amt-currency dr">−RM</span><span class="amt-value dr">125,400.00</span></div>
           <small>Approved</small>
         </div>
       </div>
@@ -570,8 +568,8 @@ select.input-field{appearance:none;cursor:pointer;}
     <div style="padding:12px 24px 16px;">
       <div class="eyebrow" style="margin-bottom:8px;">My account</div>
       <div style="display:flex;align-items:baseline;gap:4px;">
-        <span style="font-size:18px;font-weight:700;color:var(--txt);">RM</span>
-        <span style="font-size:34px;font-weight:900;letter-spacing:-1.5px;color:var(--txt);">892,400.00</span>
+        <span style="font-size:28px;font-weight:600;color:var(--txt);">RM</span>
+        <span style="font-size:28px;font-weight:600;letter-spacing:-0.5px;color:var(--txt);">892,400.00</span>
       </div>
       <div style="font-size:13px;color:var(--txt3);margin-top:4px;">Available balance</div>
     </div>
@@ -582,7 +580,7 @@ select.input-field{appearance:none;cursor:pointer;}
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="acc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
           <div style="flex:1;">
-            <div style="font-size:15px;font-weight:800;color:var(--txt);">Current Account</div>
+            <div style="font-size:15px;font-weight:600;color:var(--txt);">Current Account</div>
             <div style="font-size:12px;color:var(--txt3);margin-top:3px;letter-spacing:1px;font-weight:600;">1234 5678 9012 4821</div>
           </div>
           <span class="list-badge lb-active">Active</span>
@@ -590,8 +588,8 @@ select.input-field{appearance:none;cursor:pointer;}
       </div>
       <div style="padding:14px 20px;">
         <div style="display:flex;gap:10px;margin-bottom:10px;">
-          <div class="afc-metric"><div class="afc-metric-label">Today in</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:#12A05C;">+RM</span><span style="font-size:14px;font-weight:800;color:#12A05C;">43,240.00</span></div></div>
-          <div class="afc-metric"><div class="afc-metric-label">Today out</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:var(--red);">−RM</span><span style="font-size:14px;font-weight:800;color:var(--red);">48,000.00</span></div></div>
+          <div class="afc-metric"><div class="afc-metric-label">Today in</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:14px;font-weight:600;color:#12A05C;">+RM</span><span style="font-size:14px;font-weight:600;color:#12A05C;">43,240.00</span></div></div>
+          <div class="afc-metric"><div class="afc-metric-label">Today out</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:14px;font-weight:600;color:var(--red);">−RM</span><span style="font-size:14px;font-weight:600;color:var(--red);">48,000.00</span></div></div>
         </div>
         <div style="display:flex;gap:10px;">
           <div class="afc-metric"><div class="afc-metric-label">Profit rate</div><div class="afc-metric-value">1.80% p.a.</div></div>
@@ -606,11 +604,11 @@ select.input-field{appearance:none;cursor:pointer;}
     </div>
 
     <!-- Spending chart card -->
-    <div style="padding:20px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Spending overview</div>
+    <div style="padding:20px 24px 10px;font-size:18px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);">Spending overview</div>
     <div style="margin:0 16px;background:white;border-radius:22px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
       <!-- Month selector -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <div style="font-size:14px;font-weight:800;color:var(--txt);">May 2025</div>
+        <div style="font-size:14px;font-weight:600;color:var(--txt);">May 2025</div>
         <div style="display:flex;gap:6px;">
           <button style="padding:5px 12px;border-radius:100px;border:none;background:#F5F5F5;font-size:12px;font-weight:700;color:var(--txt3);cursor:pointer;font-family:var(--font);">3M</button>
           <button style="padding:5px 12px;border-radius:100px;border:none;background:var(--red);font-size:12px;font-weight:700;color:white;cursor:pointer;font-family:var(--font);">1M</button>
@@ -660,16 +658,16 @@ select.input-field{appearance:none;cursor:pointer;}
       <div style="display:flex;gap:10px;margin-top:14px;">
         <div style="flex:1;background:#E7FAF1;border-radius:14px;padding:12px;">
           <div style="font-size:10px;font-weight:700;color:#12A05C;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Total in</div>
-          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:#12A05C;">+RM</span><span style="font-size:16px;font-weight:900;color:#12A05C;letter-spacing:-0.5px;">248,240.00</span></div>
+          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:15px;font-weight:600;color:#12A05C;">+RM</span><span style="font-size:15px;font-weight:600;color:#12A05C;">248,240.00</span></div>
         </div>
         <div style="flex:1;background:var(--red-l);border-radius:14px;padding:12px;">
           <div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Total out</div>
-          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:var(--red);">−RM</span><span style="font-size:16px;font-weight:900;color:var(--red);letter-spacing:-0.5px;">173,400.00</span></div>
+          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:15px;font-weight:600;color:var(--red);">−RM</span><span style="font-size:15px;font-weight:600;color:var(--red);">173,400.00</span></div>
         </div>
       </div>
     </div>
 
-    <div style="padding:20px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Account settings</div>
+    <div style="padding:20px 24px 10px;font-size:18px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);">Account settings</div>
     <div class="set-group">
       <div class="set-row"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="set-inf"><div class="set-nm">Transaction limits</div><div class="set-sub">Daily: RM 500,000.00</div></div><span class="set-val">›</span></div>
       <div class="set-row"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="set-inf"><div class="set-nm">Maker-Checker rules</div><div class="set-sub">2 approvers above RM 50,000.00</div></div><span class="set-val">›</span></div>
@@ -677,11 +675,11 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div><div class="set-inf"><div class="set-nm">Account statements</div><div class="set-sub">Download e-statements</div></div><span class="set-val">›</span></div>
     </div>
 
-    <div style="padding:4px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Transactions</div>
+    <div style="padding:4px 24px 10px;font-size:18px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);">Transactions</div>
     <div style="background:white;border-radius:20px;margin:0 16px;">
-      <div class="txn"><div class="txn-ico">🏭</div><div class="txn-inf"><div class="txn-nm">AK Sdn Bhd</div><div class="txn-meta">Today <div class="txn-dot"></div> 9:14 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">48,000.00</span></div><small>IBG Out</small></div></div>
-      <div class="txn"><div class="txn-ico">🏪</div><div class="txn-inf"><div class="txn-nm">Ampang Store</div><div class="txn-meta">Today <div class="txn-dot"></div> 8:52 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency cr" style="font-size:13px;">+RM</span><span class="amt-value cr">3,240.00</span></div><small>DuitNow In</small></div></div>
-      <div class="txn" style="border-bottom:none;"><div class="txn-ico">👔</div><div class="txn-inf"><div class="txn-nm">24 Employees</div><div class="txn-meta">Yesterday <div class="txn-dot"></div> 5:00 PM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">125,400.00</span></div><small>IBG Out</small></div></div>
+      <div class="txn"><div class="txn-ico">🏭</div><div class="txn-inf"><div class="txn-nm">AK Sdn Bhd</div><div class="txn-meta">Today <div class="txn-dot"></div> 9:14 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr">−RM</span><span class="amt-value dr">48,000.00</span></div><small>IBG Out</small></div></div>
+      <div class="txn"><div class="txn-ico">🏪</div><div class="txn-inf"><div class="txn-nm">Ampang Store</div><div class="txn-meta">Today <div class="txn-dot"></div> 8:52 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency cr">+RM</span><span class="amt-value cr">3,240.00</span></div><small>DuitNow In</small></div></div>
+      <div class="txn" style="border-bottom:none;"><div class="txn-ico">👔</div><div class="txn-inf"><div class="txn-nm">24 Employees</div><div class="txn-meta">Yesterday <div class="txn-dot"></div> 5:00 PM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr">−RM</span><span class="amt-value dr">125,400.00</span></div><small>IBG Out</small></div></div>
     </div>
     <div class="spacer-nav"></div>
   </div>
@@ -700,7 +698,7 @@ select.input-field{appearance:none;cursor:pointer;}
   <div class="scr">
     <div style="padding:8px 24px 8px;">
       <div class="eyebrow" style="margin-bottom:8px;">Authorisation</div>
-      <div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Pending approvals</div>
+      <div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">Pending approvals</div>
       <div style="font-size:13px;color:var(--txt3);margin-top:4px;">3 transactions awaiting your sign-off</div>
     </div>
 
@@ -710,7 +708,7 @@ select.input-field{appearance:none;cursor:pointer;}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1"/></svg>
       </div>
       <div style="flex:1;">
-        <div style="font-size:14px;font-weight:800;color:var(--red);">BIMB Secure</div>
+        <div style="font-size:14px;font-weight:600;color:var(--red);">BIMB Secure</div>
         <div style="font-size:12px;color:var(--red-d);">Tap to view your authorisation code</div>
       </div>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -722,7 +720,7 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="apv-bank">Maybank · 5142-8821-0034</div>
       <div class="apv-by">Pn. Suraya · 4 May 2025 <span style="margin:0 3px;">·</span> 3:45 PM</div>
       <div class="apv-foot">
-        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">75,000.00</span></div>
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value">75,000.00</span></div>
         <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('Pembinaan Jaya Sdn Bhd','75,000.00')">Approve</button></div>
       </div>
     </div>
@@ -733,7 +731,7 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="apv-bank">Acc: 200349821 · Ref: INV-2025-0492</div>
       <div class="apv-by">En. Razif · 4 May 2025 <span style="margin:0 3px;">·</span> 2:10 PM</div>
       <div class="apv-foot">
-        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">12,480.00</span></div>
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value">12,480.00</span></div>
         <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('TNB Commercial','12,480.00')">Approve</button></div>
       </div>
     </div>
@@ -744,7 +742,7 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="apv-bank">CIMB Bank · 7041-8823-0012</div>
       <div class="apv-by">En. Hazwan · 3 May 2025 <span style="margin:0 3px;">·</span> 4:55 PM</div>
       <div class="apv-foot">
-        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">280,000.00</span></div>
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value">280,000.00</span></div>
         <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('Global Trade Partners (M) Bhd','280,000.00')">Approve</button></div>
       </div>
     </div>
@@ -853,27 +851,27 @@ select.input-field{appearance:none;cursor:pointer;}
   <div class="scr">
     <div style="padding:8px 24px 0;">
       <div class="eyebrow" style="margin-bottom:6px;">BIMB Biz</div>
-      <div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Merchant portal</div>
+      <div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">Merchant portal</div>
     </div>
     <div style="margin:16px 16px 0;background:white;border-radius:20px;padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="showScreen('s-stores')">
       <div style="width:42px;height:42px;border-radius:14px;background:var(--red-l);display:flex;align-items:center;justify-content:center;font-size:22px;">🏪</div>
-      <div style="flex:1;"><div style="font-size:15px;font-weight:800;color:var(--txt);">Ampang Main Store</div><div style="font-size:12px;color:var(--txt3);">3 outlets · 8 cashiers active</div></div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--txt);">Ampang Main Store</div><div style="font-size:12px;color:var(--txt3);">3 outlets · 8 cashiers active</div></div>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CCC" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div style="display:flex;gap:10px;padding:14px 16px 0;">
       <div class="stat">
         <div class="stat-lbl">Today's sales</div>
-        <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:12px;font-weight:800;color:var(--red);">RM</span><span style="font-size:18px;font-weight:900;letter-spacing:-0.6px;color:var(--red);">20,840.00</span></div>
+        <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:15px;font-weight:600;color:var(--red);">RM</span><span style="font-size:15px;font-weight:600;color:var(--red);">20,840.00</span></div>
         <div class="stat-sub">↑ 12% vs yesterday</div>
       </div>
       <div class="stat"><div class="stat-lbl">Transactions</div><div class="stat-val">247</div><div class="stat-sub">All outlets</div></div>
     </div>
-    <div style="padding:16px 24px 10px;font-size:17px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">DuitNow QR</div>
+    <div style="padding:16px 24px 10px;font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);">DuitNow QR</div>
     <div style="display:flex;gap:8px;padding:0 16px;">
       <button class="pill pill-red" onclick="showQR('static')">Static QR</button>
       <button class="pill pill-ghost" onclick="showQR('dynamic')">Dynamic QR</button>
     </div>
-    <div style="padding:16px 24px 10px;font-size:17px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Merchant tools</div>
+    <div style="padding:16px 24px 10px;font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--txt);">Merchant tools</div>
     <div class="biz-grid">
       <div class="biz-tile" onclick="showScreen('s-stores')"><div class="biz-tile-ico b"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="biz-tile-nm">Manage Stores</div><div class="biz-tile-ds">View and edit outlets</div></div></div>
       <div class="biz-tile" onclick="showScreen('s-cashiers')"><div class="biz-tile-ico g"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="biz-tile-nm">Cashiers</div><div class="biz-tile-ds">Manage cashier accounts</div></div></div>
@@ -881,7 +879,7 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="biz-tile"><div class="biz-tile-ico r"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="biz-tile-nm">Terminal</div><div class="biz-tile-ds">Cashier POS view</div></div></div>
     </div>
     <div style="margin:16px 16px 0;background:white;border-radius:20px;padding:18px 20px;">
-      <div style="font-size:15px;font-weight:800;color:var(--txt);margin-bottom:16px;">Outlet performance today</div>
+      <div style="font-size:15px;font-weight:600;color:var(--txt);margin-bottom:16px;">Outlet performance today</div>
       <div class="ob"><div class="ob-top"><span class="ob-nm">Ampang Main Store</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">12,400.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:60%;background:var(--red);"></div></div></div>
       <div class="ob"><div class="ob-top"><span class="ob-nm">Cheras Branch</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">5,840.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:28%;background:#E6A817;"></div></div></div>
       <div class="ob" style="margin-bottom:0;"><div class="ob-top"><span class="ob-nm">Petaling Jaya</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">2,600.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:13%;background:#AAAAAA;"></div></div></div>
@@ -901,12 +899,12 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-stores">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Manage Stores</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">3 active outlets</div></div>
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">Manage Stores</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">3 active outlets</div></div>
     <div style="padding:0 16px 12px;"><button class="pill pill-red" style="width:100%;justify-content:center;" onclick="showScreen('s-add-store')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add new store</button></div>
     <div style="background:white;border-radius:22px;margin:0 16px;overflow:hidden;">
-      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Ampang Main Store</div><div class="list-sub">BI-40921 · 4 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">12,400.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
-      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Cheras Branch</div><div class="list-sub">BI-40922 · 3 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">5,840.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
-      <div class="list-item" style="border-bottom:none;"><div class="list-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#999"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Petaling Jaya</div><div class="list-sub">BI-40923 · 1 cashier</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,600.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Ampang Main Store</div><div class="list-sub">BI-40921 · 4 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">12,400.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Cheras Branch</div><div class="list-sub">BI-40922 · 3 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">5,840.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+      <div class="list-item" style="border-bottom:none;"><div class="list-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#999"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Petaling Jaya</div><div class="list-sub">BI-40923 · 1 cashier</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">2,600.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
     </div>
     <div class="spacer-nav"></div>
   </div>
@@ -926,19 +924,19 @@ select.input-field{appearance:none;cursor:pointer;}
     <div style="background:var(--red);padding:8px 24px 24px;">
       <button class="back-btn" onclick="showScreen('s-stores')" style="color:rgba(255,255,255,0.8);"><svg viewBox="0 0 24 24" style="stroke:white;"><polyline points="15 18 9 12 15 6"/></svg>Stores</button>
       <div style="color:rgba(255,255,255,0.7);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:12px;">Outlet details</div>
-      <div style="color:white;font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-top:4px;">Ampang Main Store</div>
+      <div style="color:white;font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-top:4px;">Ampang Main Store</div>
       <div style="color:rgba(255,255,255,0.65);font-size:13px;">Merchant ID: BI-40921</div>
     </div>
     <div style="display:flex;gap:10px;padding:16px 16px 0;">
-      <div class="stat"><div class="stat-lbl">Today's sales</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:12px;font-weight:800;color:var(--txt);">RM</span><span style="font-size:18px;font-weight:900;color:var(--txt);">12,400.00</span></div><div class="stat-sub">↑ 8% vs yesterday</div></div>
+      <div class="stat"><div class="stat-lbl">Today's sales</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:15px;font-weight:600;color:var(--txt);">RM</span><span style="font-size:15px;font-weight:600;color:var(--txt);">12,400.00</span></div><div class="stat-sub">↑ 8% vs yesterday</div></div>
       <div class="stat"><div class="stat-lbl">Transactions</div><div class="stat-val">148</div><div class="stat-sub">Today</div></div>
     </div>
     <div style="margin:14px 16px 0;background:white;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
       <div style="width:50px;height:50px;background:var(--red-l);border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3M14 17h3M17 14v3M20 14v7M20 17h-3"/></svg></div>
-      <div style="flex:1;"><div style="font-size:14px;font-weight:800;color:var(--txt);">Store DuitNow QR</div><div style="font-size:12px;color:var(--txt3);">Static · Share with customers</div></div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:var(--txt);">Store DuitNow QR</div><div style="font-size:12px;color:var(--txt3);">Static · Share with customers</div></div>
       <button class="pill pill-red" style="font-size:12px;padding:8px 14px;" onclick="showQR('static')">View QR</button>
     </div>
-    <div style="padding:16px 24px 10px;font-size:16px;font-weight:800;letter-spacing:-0.2px;color:var(--txt);">Cashiers <span style="font-size:13px;font-weight:600;color:var(--txt3);">4 active</span></div>
+    <div style="padding:16px 24px 10px;font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--txt);">Cashiers <span style="font-size:13px;font-weight:600;color:var(--txt3);">4 active</span></div>
     <div style="background:white;border-radius:20px;margin:0 16px;">
       <div class="list-item"><div class="cashier-av" style="background:#DC2A54;">AM</div><div class="list-inf"><div class="list-nm">Ahmad Muaz</div><div class="list-sub">CSH-001 · Active now</div></div><span class="list-badge lb-active">Online</span></div>
       <div class="list-item"><div class="cashier-av" style="background:#1570B8;">SR</div><div class="list-inf"><div class="list-nm">Siti Rahmah</div><div class="list-sub">CSH-002 · 1h ago</div></div><span class="list-badge lb-inactive">Offline</span></div>
@@ -960,7 +958,7 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-cashiers">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Cashiers</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">8 cashiers across 3 outlets</div></div>
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">Cashiers</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">8 cashiers across 3 outlets</div></div>
     <div style="padding:0 16px 12px;"><button class="pill pill-red" style="width:100%;justify-content:center;" onclick="showScreen('s-add-cashier')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Create cashier account</button></div>
     <div style="display:flex;gap:8px;padding:0 16px 14px;overflow-x:auto;">
       <button class="pill pill-red" style="font-size:12px;padding:7px 14px;">All (8)</button>
@@ -969,12 +967,12 @@ select.input-field{appearance:none;cursor:pointer;}
       <button class="pill pill-ghost" style="font-size:12px;padding:7px 14px;flex-shrink:0;">PJ (1)</button>
     </div>
     <div style="background:white;border-radius:22px;margin:0 16px;overflow:hidden;">
-      <div class="list-item"><div class="cashier-av" style="background:#DC2A54;">AM</div><div class="list-inf"><div class="list-nm">Ahmad Muaz</div><div class="list-sub">Ampang · CSH-001</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">3,240.00</span></div></div></div>
-      <div class="list-item"><div class="cashier-av" style="background:#1570B8;">SR</div><div class="list-inf"><div class="list-nm">Siti Rahmah</div><div class="list-sub">Ampang · CSH-002</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,180.00</span></div></div></div>
-      <div class="list-item"><div class="cashier-av" style="background:#12A05C;">FH</div><div class="list-inf"><div class="list-nm">Farid Hazwan</div><div class="list-sub">Ampang · CSH-003</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">4,110.00</span></div></div></div>
-      <div class="list-item"><div class="cashier-av" style="background:#6B3FB5;">NR</div><div class="list-inf"><div class="list-nm">Nur Aisyah</div><div class="list-sub">Cheras · CSH-004</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,870.00</span></div></div></div>
-      <div class="list-item"><div class="cashier-av" style="background:#E6A817;">KA</div><div class="list-inf"><div class="list-nm">Khairul Azri</div><div class="list-sub">Cheras · CSH-005</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">1,640.00</span></div></div></div>
-      <div class="list-item" style="border-bottom:none;"><div class="cashier-av" style="background:#888;">ZH</div><div class="list-inf"><div class="list-nm">Zulaikha Hani</div><div class="list-sub">PJ · CSH-008</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,600.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#DC2A54;">AM</div><div class="list-inf"><div class="list-nm">Ahmad Muaz</div><div class="list-sub">Ampang · CSH-001</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">3,240.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#1570B8;">SR</div><div class="list-inf"><div class="list-nm">Siti Rahmah</div><div class="list-sub">Ampang · CSH-002</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">2,180.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#12A05C;">FH</div><div class="list-inf"><div class="list-nm">Farid Hazwan</div><div class="list-sub">Ampang · CSH-003</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">4,110.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#6B3FB5;">NR</div><div class="list-inf"><div class="list-nm">Nur Aisyah</div><div class="list-sub">Cheras · CSH-004</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">2,870.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#E6A817;">KA</div><div class="list-inf"><div class="list-nm">Khairul Azri</div><div class="list-sub">Cheras · CSH-005</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">1,640.00</span></div></div></div>
+      <div class="list-item" style="border-bottom:none;"><div class="cashier-av" style="background:#888;">ZH</div><div class="list-inf"><div class="list-nm">Zulaikha Hani</div><div class="list-sub">PJ · CSH-008</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:12px;font-weight:500;color:var(--txt3);">RM&nbsp;</span><span style="font-size:12px;font-weight:500;color:var(--txt3);">2,600.00</span></div></div></div>
     </div>
     <div class="spacer-nav"></div>
   </div>
@@ -991,7 +989,7 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-add-cashier">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-cashiers')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Cashiers</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">Create account</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">New Cashier</div></div>
+    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-cashiers')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Cashiers</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">Create account</div><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">New Cashier</div></div>
     <div style="padding:0 24px;">
       <div class="input-group"><div class="input-lbl">Full name</div><input class="input-field" type="text" placeholder="e.g. Ahmad bin Ibrahim"></div>
       <div class="input-group"><div class="input-lbl">IC / Employee ID</div><input class="input-field" type="text" placeholder="e.g. 901234-10-1234"></div>
@@ -1009,7 +1007,7 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-add-store">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-stores')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Stores</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">New Store</div></div>
+    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-stores')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Stores</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);">New Store</div></div>
     <div style="padding:0 24px;">
       <div class="input-group"><div class="input-lbl">Store name</div><input class="input-field" type="text" placeholder="e.g. KL Sentral Branch"></div>
       <div class="input-group"><div class="input-lbl">Business registration no.</div><input class="input-field" type="text" placeholder="e.g. 202001012345"></div>
@@ -1027,7 +1025,7 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-qr-static">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Static QR Code</div><div style="font-size:13px;color:var(--txt3);">Customer scans to pay any amount</div></div>
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Static QR Code</div><div style="font-size:13px;color:var(--txt3);">Customer scans to pay any amount</div></div>
     <div class="duitnow-card">
       <div class="duitnow-header">
         <div class="duitnow-logo-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/><path d="M9 8s1-1.5 3-1.5 3 1.5 3 3.5-1.5 3.5-3 3.5H9" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>DuitNow QR</div>
@@ -1074,11 +1072,11 @@ select.input-field{appearance:none;cursor:pointer;}
 <div class="screen" id="s-qr-dynamic">
   <div class="sb"><span>9:41</span></div>
   <div class="scr">
-    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Dynamic QR</div><div style="font-size:13px;color:var(--txt3);">Set amount for this payment</div></div>
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:700;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Dynamic QR</div><div style="font-size:13px;color:var(--txt3);">Set amount for this payment</div></div>
     <div id="dynAmtEntry">
       <div style="text-align:center;padding:10px 24px 24px;">
         <div class="eyebrow" style="margin-bottom:10px;">Enter amount (RM)</div>
-        <input style="font-size:48px;font-weight:900;letter-spacing:-2px;color:var(--txt);text-align:center;width:100%;border:none;background:transparent;font-family:var(--font);outline:none;" id="dynAmtInput" type="number" placeholder="0.00" min="0" step="0.01" oninput="updateDynAmt()">
+        <input style="font-size:48px;font-weight:700;letter-spacing:-2px;color:var(--txt);text-align:center;width:100%;border:none;background:transparent;font-family:var(--font);outline:none;" id="dynAmtInput" type="number" placeholder="0.00" min="0" step="0.01" oninput="updateDynAmt()">
         <div style="height:1px;background:#E5E5E5;margin:12px 0;"></div>
         <div style="font-size:13px;color:var(--txt3);">Ampang Main Store · BI-40921</div>
       </div>
@@ -1092,7 +1090,7 @@ select.input-field{appearance:none;cursor:pointer;}
       <div class="duitnow-card">
         <div class="duitnow-header"><div class="duitnow-logo-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/><path d="M9 8s1-1.5 3-1.5 3 1.5 3 3.5-1.5 3.5-3 3.5H9" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>DuitNow QR</div><div class="duitnow-type">Dynamic · Fixed Amount</div></div>
         <div class="duitnow-qr-area">
-          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;">Amount to pay</div><div style="display:flex;align-items:baseline;gap:4px;justify-content:center;margin-top:4px;"><span style="font-size:16px;font-weight:700;color:var(--txt);">RM</span><span style="font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--txt);" id="dynQRAmt">0.00</span></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;">Amount to pay</div><div style="display:flex;align-items:baseline;gap:3px;justify-content:center;margin-top:4px;"><span style="font-size:22px;font-weight:600;color:var(--txt);">RM</span><span style="font-size:22px;font-weight:600;letter-spacing:-0.5px;color:var(--txt);" id="dynQRAmt">0.00</span></div></div>
           <svg width="140" height="140" viewBox="0 0 180 180"><rect x="10" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="20" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="120" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="130" y="20" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="10" y="120" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="130" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="75" y="10" width="8" height="8" fill="#DC2A54"/><rect x="87" y="16" width="8" height="8" fill="#DC2A54"/><rect x="75" y="28" width="8" height="8" fill="#DC2A54"/><rect x="75" y="75" width="8" height="8" fill="#DC2A54"/><rect x="91" y="75" width="8" height="8" fill="#DC2A54"/><rect x="107" y="75" width="8" height="8" fill="#DC2A54"/><rect x="123" y="75" width="8" height="8" fill="#DC2A54"/><rect x="139" y="75" width="8" height="8" fill="#DC2A54"/><rect x="155" y="75" width="8" height="8" fill="#DC2A54"/><rect x="75" y="91" width="8" height="8" fill="#DC2A54"/><rect x="107" y="91" width="8" height="8" fill="#DC2A54"/><rect x="75" y="107" width="8" height="8" fill="#DC2A54"/><rect x="91" y="107" width="8" height="8" fill="#DC2A54"/><rect x="123" y="107" width="8" height="8" fill="#DC2A54"/><rect x="155" y="107" width="8" height="8" fill="#DC2A54"/></svg>
           <div><div class="duitnow-merchant">Ampang Main Store</div><div class="duitnow-bank">Bank Islam · Ahmad Muaz</div></div>
         </div>
@@ -1109,24 +1107,24 @@ select.input-field{appearance:none;cursor:pointer;}
   <div class="scr">
     <div style="padding:12px 24px 24px;text-align:center;">
       <div class="profile-avatar">AR</div>
-      <div style="font-size:20px;font-weight:900;letter-spacing:-0.4px;color:var(--txt);">Encik Ahmad Razif</div>
+      <div style="font-size:20px;font-weight:700;letter-spacing:-0.4px;color:var(--txt);">Encik Ahmad Razif</div>
       <div style="font-size:13px;color:var(--txt3);margin-top:3px;">Authorised Signatory</div>
       <div style="display:inline-flex;align-items:center;gap:6px;background:#F5F5F5;border-radius:100px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--txt2);margin-top:10px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Razif Industries Sdn Bhd</div>
     </div>
-    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Security</div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Security</div>
     <div class="set-group">
       <div class="set-row"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="set-inf"><div class="set-nm">Change PIN</div><div class="set-sub">Last changed 30 days ago</div></div><span class="set-val">›</span></div>
       <div class="set-row" onclick="showSoftToken('Pembinaan Jaya Sdn Bhd','75,000.00','IBG Transfer')"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="set-inf"><div class="set-nm">BIMB Secure</div><div class="set-sub">Device registered · Active</div></div><span class="list-badge lb-active" style="font-size:10px;">Active</span></div>
       <div class="set-row"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="set-inf"><div class="set-nm">Biometric login</div><div class="set-sub">Face ID · Fingerprint</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
       <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><div class="set-inf"><div class="set-nm">Trusted devices</div><div class="set-sub">1 device registered</div></div><span class="set-val">›</span></div>
     </div>
-    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Approvals &amp; Limits</div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Approvals &amp; Limits</div>
     <div class="set-group">
       <div class="set-row"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="set-inf"><div class="set-nm">Approval workflow</div><div class="set-sub">2 approvers · above RM 50,000.00</div></div><span class="set-val">›</span></div>
       <div class="set-row"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="set-inf"><div class="set-nm">Daily transfer limit</div><div class="set-sub">RM 500,000.00 per day</div></div><span class="set-val">›</span></div>
       <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="set-inf"><div class="set-nm">Authorised signatories</div><div class="set-sub">3 users with approval rights</div></div><span class="set-val">›</span></div>
     </div>
-    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Notifications</div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Notifications</div>
     <div class="set-group">
       <div class="set-row"><div class="set-ico" style="background:#F0EAFD;"><svg viewBox="0 0 24 24" stroke="#6B3FB5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div class="set-inf"><div class="set-nm">Transaction alerts</div><div class="set-sub">Push &amp; SMS for all transactions</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
       <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="set-inf"><div class="set-nm">E-statement delivery</div><div class="set-sub">ahmad@razif-industries.com</div></div><span class="set-val">›</span></div>
