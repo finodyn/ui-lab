@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bank Islam ProMobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --red:#DC2A54;--red-l:#FBE9EE;--red-m:#F5C0CE;--red-d:#B0213F;
+  --txt:#1A1A1A;--txt2:#666;--txt3:#999;
+  --bg:#F2F2F2;--border:rgba(0,0,0,0.08);
+  --font:'Inter',-apple-system,sans-serif;
+}
+html,body{font-family:var(--font);background:#CACACA;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:20px 0;}
+
+/* PHONE */
+.phone{width:390px;height:calc(100vh - 40px);max-height:844px;min-height:680px;background:var(--bg);border-radius:52px;overflow:hidden;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,0.14),0 40px 100px rgba(0,0,0,0.4),inset 0 0 0 1.5px rgba(255,255,255,0.2);display:flex;flex-direction:column;}
+
+/* STATUS BAR */
+.sb{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 0;font-size:15px;font-weight:700;color:var(--txt);flex-shrink:0;position:relative;z-index:10;}
+.sb-icons{display:flex;align-items:center;gap:5px;}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;flex:1;overflow:hidden;}
+.screen.active{display:flex;}
+.scr{flex:1;overflow-y:auto;overscroll-behavior:contain;}
+.scr::-webkit-scrollbar{display:none;}
+
+/* FLOATING NAV */
+.fnav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;background:white;border-radius:100px;padding:8px 6px;box-shadow:0 4px 24px rgba(0,0,0,0.18),0 1px 4px rgba(0,0,0,0.1);z-index:100;gap:2px;}
+.fn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 14px;border-radius:100px;cursor:pointer;background:none;border:none;font-family:var(--font);transition:background 0.15s;min-width:64px;}
+.fn:hover{background:#F5F5F5;}
+.fn.active{background:var(--red-l);}
+.fn svg{width:22px;height:22px;stroke:#AAAAAA;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.fn.active svg{stroke:var(--red);}
+.fn span{font-size:10px;font-weight:700;color:#AAAAAA;}
+.fn.active span{color:var(--red);}
+.fn-bw{position:relative;}
+.fn-badge{position:absolute;top:-2px;right:-2px;background:var(--red);color:white;font-size:8px;font-weight:800;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid white;}
+
+/* TYPOGRAPHY */
+.eyebrow{font-size:12px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.8px;}
+.section-hd{font-size:22px;font-weight:900;letter-spacing:-0.5px;color:var(--txt);padding:20px 24px 10px;}
+
+/* PILL BUTTONS */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:var(--font);transition:opacity 0.15s,transform 0.1s;white-space:nowrap;}
+.pill:active{transform:scale(0.97);}
+.pill-red{background:var(--red);color:white;}
+.pill-red-soft{background:var(--red-l);color:var(--red);}
+.pill-ghost{background:#EFEFEF;color:var(--txt);}
+.pill-outline{background:white;color:var(--txt);border:1.5px solid #E0E0E0;}
+
+/* BI LOGO — SVG recreation */
+.bi-logo-svg{display:flex;align-items:center;}
+
+/* ACCOUNT ROW */
+.acc-row{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #F7F7F7;cursor:pointer;}
+.acc-row:last-child{border-bottom:none;}
+.acc-ico{width:38px;height:38px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--red-l);}
+.acc-ico svg{width:18px;height:18px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.acc-inf{flex:1;}
+.acc-nm{font-size:14px;font-weight:700;color:var(--txt);}
+.acc-num{font-size:11px;color:var(--txt3);margin-top:1px;}
+.acc-bal{text-align:right;}
+/* INLINE amount: RM and number same line */
+.amt-inline{display:flex;align-items:baseline;gap:3px;justify-content:flex-end;}
+.amt-currency{font-size:13px;font-weight:700;color:var(--txt);}
+.amt-value{font-size:15px;font-weight:800;color:var(--txt);letter-spacing:-0.3px;}
+.amt-sub{font-size:11px;color:var(--txt3);}
+
+/* TXN ROW — Wise style: no category label, company name + inline date/time */
+.txn{display:flex;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid #F5F5F5;}
+.txn:last-child{border-bottom:none;}
+.txn-ico{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;background:#F5F5F5;}
+.txn-inf{flex:1;}
+.txn-nm{font-size:15px;font-weight:700;color:var(--txt);}
+.txn-meta{font-size:12px;color:var(--txt3);margin-top:2px;display:flex;align-items:center;gap:4px;}
+.txn-dot{width:3px;height:3px;border-radius:50%;background:var(--txt3);}
+.txn-amt{text-align:right;}
+.txn-amt .amt-inline{justify-content:flex-end;}
+.txn-amt small{font-size:11px;color:var(--txt3);}
+.cr{color:#12A05C;}
+.dr{color:var(--txt);}
+
+/* TASKS (Wise-style) */
+.task-card{margin:0 16px 10px;background:#F0F0F0;border-radius:20px;padding:18px;display:flex;align-items:flex-start;gap:14px;}
+.task-card-ico{width:42px;height:42px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-card-ico svg{width:20px;height:20px;stroke:var(--txt);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.task-card-inf{flex:1;}
+.task-card-title{font-size:15px;font-weight:800;color:var(--txt);margin-bottom:3px;}
+.task-card-sub{font-size:13px;color:var(--txt2);line-height:1.4;margin-bottom:12px;}
+.task-card-actions{display:flex;gap:8px;}
+
+/* APPROVAL CARD */
+.apv-card{margin:0 16px 12px;background:white;border-radius:22px;padding:18px 20px;}
+.apv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.apv-tag{font-size:11px;font-weight:700;letter-spacing:0.3px;padding:4px 10px;border-radius:100px;}
+.apv-tag.tf{background:var(--red-l);color:var(--red);}
+.apv-tag.bp{background:#EAF3FD;color:#1570B8;}
+.apv-tag.rt{background:#F0EAFD;color:#6B3FB5;}
+.apv-pend{font-size:12px;font-weight:600;color:#E6A817;}
+.apv-name{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-0.3px;margin-bottom:2px;}
+.apv-bank{font-size:12px;color:var(--txt3);margin-bottom:3px;}
+.apv-by{font-size:11px;color:var(--txt3);margin-bottom:14px;}
+.apv-foot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid #F0F0F0;}
+.apv-amount{display:flex;align-items:baseline;gap:4px;}
+.apv-amount .amt-currency{font-size:15px;font-weight:700;}
+.apv-amount .amt-value{font-size:22px;font-weight:900;letter-spacing:-0.8px;}
+.apv-btns{display:flex;gap:8px;}
+.btn-rej{padding:9px 16px;border-radius:100px;border:1.5px solid #E0E0E0;background:white;font-size:13px;font-weight:700;color:var(--txt2);cursor:pointer;font-family:var(--font);}
+.btn-apv{padding:9px 16px;border-radius:100px;border:none;background:var(--red);font-size:13px;font-weight:700;color:white;cursor:pointer;font-family:var(--font);}
+
+/* OVERLAY / SHEET */
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,0.48);display:flex;align-items:flex-end;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.28s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.sheet{background:white;border-radius:32px 32px 0 0;padding:0 24px 36px;width:100%;transform:translateY(100%);transition:transform 0.36s cubic-bezier(0.34,1.3,0.64,1);}
+.overlay.show .sheet{transform:translateY(0);}
+.sheet-handle{width:40px;height:5px;background:#E5E5E5;border-radius:3px;margin:14px auto 22px;}
+.sheet-title{font-size:22px;font-weight:900;letter-spacing:-0.5px;margin-bottom:4px;}
+.sheet-sub{font-size:14px;color:var(--txt3);margin-bottom:20px;}
+
+/* TOTP */
+.totp-box{background:#F9F9F9;border-radius:18px;padding:18px;text-align:center;margin-bottom:20px;}
+.totp-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--txt3);margin-bottom:6px;}
+.totp-val-row{display:flex;align-items:baseline;gap:4px;justify-content:center;}
+.totp-val-cur{font-size:18px;font-weight:700;color:var(--txt);}
+.totp-val-num{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--txt);}
+.totp-rcp{font-size:13px;color:var(--txt3);margin-top:3px;}
+.totp-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.totp-clbl{font-size:13px;font-weight:700;color:var(--txt);}
+.totp-tmr{font-size:13px;font-weight:700;color:var(--red);}
+.totp-digits{display:flex;gap:8px;justify-content:center;margin-bottom:10px;}
+.td{flex:1;height:54px;background:#F5F5F5;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
+.td.flash{background:var(--red-l);}
+.totp-prog{height:4px;background:#EFEFEF;border-radius:2px;margin-bottom:22px;overflow:hidden;}
+.totp-prog-fill{height:100%;background:var(--red);border-radius:2px;transition:width 1s linear;}
+.btn-full{width:100%;padding:17px;border-radius:100px;border:none;background:var(--red);color:white;font-size:16px;font-weight:800;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;transition:opacity 0.15s,transform 0.1s;}
+.btn-full:active{transform:scale(0.98);}
+
+/* SOFT TOKEN FULL SCREEN */
+.soft-token-screen{position:absolute;inset:0;background:white;z-index:250;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.soft-token-screen.show{opacity:1;pointer-events:all;}
+.st-header{background:var(--red);padding:52px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.st-header-title{color:white;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;opacity:0.75;}
+.st-header-name{color:white;font-size:18px;font-weight:900;margin-top:2px;letter-spacing:-0.3px;}
+.st-header-bank{color:rgba(255,255,255,0.65);font-size:12px;}
+.st-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;}
+.st-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--txt3);margin-bottom:14px;}
+.st-code-row{display:flex;gap:10px;justify-content:center;margin-bottom:18px;}
+.st-digit{width:48px;height:60px;background:#F5F5F5;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--txt);font-variant-numeric:tabular-nums;transition:background 0.2s;}
+.st-digit.flash{background:var(--red-l);}
+.st-ring{position:relative;width:80px;height:80px;margin:0 auto 16px;}
+.st-ring svg{width:80px;height:80px;transform:rotate(-90deg);}
+.st-ring-bg{fill:none;stroke:#F0F0F0;stroke-width:6;}
+.st-ring-fill{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-dasharray:220;transition:stroke-dashoffset 1s linear;}
+.st-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--txt);}
+.st-hint{font-size:13px;color:var(--txt3);text-align:center;line-height:1.5;max-width:220px;margin-top:4px;}
+.st-txn-box{background:#F9F9F9;border-radius:18px;padding:16px 20px;width:100%;margin-top:24px;}
+.st-txn-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.st-txn-row:last-child{margin-bottom:0;padding-top:8px;border-top:1px solid #EBEBEB;margin-top:8px;}
+.st-txn-lbl{font-size:12px;color:var(--txt3);font-weight:500;}
+.st-txn-val{font-size:13px;font-weight:700;color:var(--txt);}
+.st-txn-val.big{font-size:18px;font-weight:900;letter-spacing:-0.5px;}
+.st-footer{padding:0 28px 40px;}
+
+/* SUCCESS */
+.succ{position:absolute;inset:0;background:white;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.succ.show{opacity:1;pointer-events:all;}
+.succ-ico{width:88px;height:88px;border-radius:50%;background:#E7FAF1;display:flex;align-items:center;justify-content:center;}
+.succ-ico svg{width:44px;height:44px;stroke:#12A05C;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.succ h2{font-size:26px;font-weight:900;letter-spacing:-0.6px;color:var(--txt);}
+.succ p{font-size:15px;color:var(--txt3);text-align:center;line-height:1.5;max-width:250px;}
+.succ .ref{font-size:12px;color:var(--txt3);background:#F5F5F5;padding:7px 16px;border-radius:100px;font-weight:600;}
+
+/* BIZ */
+.biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
+.biz-tile{background:white;border-radius:22px;padding:18px 16px;cursor:pointer;display:flex;flex-direction:column;gap:10px;transition:transform 0.1s;}
+.biz-tile:active{transform:scale(0.97);}
+.biz-tile-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.biz-tile-ico svg{width:22px;height:22px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.biz-tile-ico.r{background:var(--red-l);}
+.biz-tile-ico.r svg{stroke:var(--red);}
+.biz-tile-ico.b{background:#EAF3FD;}
+.biz-tile-ico.b svg{stroke:#1570B8;}
+.biz-tile-ico.g{background:#E7FAF1;}
+.biz-tile-ico.g svg{stroke:#12A05C;}
+.biz-tile-ico.p{background:#F0EAFD;}
+.biz-tile-ico.p svg{stroke:#6B3FB5;}
+.biz-tile-nm{font-size:14px;font-weight:800;color:var(--txt);line-height:1.2;}
+.biz-tile-ds{font-size:11px;color:var(--txt3);line-height:1.4;}
+
+/* STAT */
+.stat{flex:1;background:white;border-radius:18px;padding:14px;}
+.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--txt3);margin-bottom:5px;}
+.stat-val{font-size:18px;font-weight:900;letter-spacing:-0.6px;color:var(--txt);}
+.stat-sub{font-size:11px;color:var(--txt3);margin-top:2px;font-weight:500;}
+
+/* OUTLET BAR */
+.ob{margin-bottom:14px;}
+.ob:last-child{margin-bottom:0;}
+.ob-top{display:flex;justify-content:space-between;margin-bottom:5px;}
+.ob-nm{font-size:13px;font-weight:600;color:var(--txt);}
+.ob-val-row{display:flex;align-items:baseline;gap:2px;}
+.ob-val-cur{font-size:11px;font-weight:700;color:var(--txt);}
+.ob-val-num{font-size:13px;font-weight:800;color:var(--txt);}
+.ob-track{height:6px;background:#F0F0F0;border-radius:3px;overflow:hidden;}
+.ob-fill{height:100%;border-radius:3px;}
+
+/* LIST ITEM */
+.list-item{display:flex;align-items:center;gap:14px;padding:16px 20px;background:white;border-bottom:1px solid #F5F5F5;cursor:pointer;}
+.list-item:last-child{border-bottom:none;}
+.list-ico{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.list-ico svg{width:20px;height:20px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.list-inf{flex:1;}
+.list-nm{font-size:15px;font-weight:700;color:var(--txt);}
+.list-sub{font-size:12px;color:var(--txt3);margin-top:2px;}
+.list-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;}
+.lb-active{background:#E7FAF1;color:#12A05C;}
+.lb-inactive{background:#F5F5F5;color:var(--txt3);}
+
+/* SETTINGS */
+.set-group{background:white;border-radius:20px;margin:0 16px 14px;overflow:hidden;}
+.set-row{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid #F7F7F7;cursor:pointer;}
+.set-row:last-child{border-bottom:none;}
+.set-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.set-ico svg{width:18px;height:18px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.set-inf{flex:1;}
+.set-nm{font-size:15px;font-weight:600;color:var(--txt);}
+.set-sub{font-size:12px;color:var(--txt3);margin-top:1px;}
+.set-val{font-size:13px;color:var(--txt3);}
+.toggle{width:44px;height:26px;border-radius:13px;background:#E0E0E0;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;border:none;}
+.toggle.on{background:var(--red);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.toggle.on::after{left:21px;}
+
+/* FORM */
+.input-group{margin-bottom:16px;}
+.input-lbl{font-size:12px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.input-field{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #E8E8E8;font-family:var(--font);font-size:15px;font-weight:600;color:var(--txt);background:white;outline:none;transition:border-color 0.2s;}
+.input-field:focus{border-color:var(--red);}
+select.input-field{appearance:none;cursor:pointer;}
+
+/* BACK BTN */
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:700;color:var(--txt);padding:8px 0;}
+.back-btn svg{width:20px;height:20px;stroke:var(--txt);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* DUITNOW */
+.duitnow-card{margin:0 24px;background:white;border-radius:24px;border:2px solid #F0F0F0;overflow:hidden;}
+.duitnow-header{background:var(--red);padding:18px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.duitnow-logo-text{color:white;font-size:15px;font-weight:900;letter-spacing:-0.3px;display:flex;align-items:center;gap:6px;}
+.duitnow-type{color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.duitnow-qr-area{padding:20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.duitnow-merchant{font-size:15px;font-weight:800;color:var(--txt);text-align:center;}
+.duitnow-bank{font-size:12px;color:var(--txt3);text-align:center;}
+.duitnow-footer{background:#F9F9F9;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #F0F0F0;}
+
+/* PROFILE */
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:white;margin:0 auto 12px;}
+
+.spacer-nav{height:88px;flex-shrink:0;}
+
+/* CASHIER AVATAR */
+.cashier-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:white;flex-shrink:0;}
+
+/* ACCOUNT CARD — card style like dribbble ref */
+.acct-card{
+  border-radius:22px;padding:22px 22px 20px;
+  position:relative;overflow:hidden;cursor:pointer;
+  flex-shrink:0;width:100%;
+}
+.acct-card-primary{background:var(--red);}
+.acct-card-secondary{background:#1A1A1A;}
+.acct-card-label{font-size:11px;font-weight:600;letter-spacing:0.5px;opacity:0.7;margin-bottom:4px;}
+.acct-card-primary .acct-card-label{color:rgba(255,255,255,0.75);}
+.acct-card-secondary .acct-card-label{color:rgba(255,255,255,0.6);}
+.acct-card-type{font-size:14px;font-weight:700;margin-bottom:18px;}
+.acct-card-primary .acct-card-type{color:rgba(255,255,255,0.9);}
+.acct-card-secondary .acct-card-type{color:rgba(255,255,255,0.8);}
+.acct-card-bal-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.acct-card-bal{display:flex;align-items:baseline;gap:4px;}
+.acct-card-bal-cur{font-size:18px;font-weight:700;}
+.acct-card-bal-num{font-size:30px;font-weight:900;letter-spacing:-1.2px;line-height:1;}
+.acct-card-primary .acct-card-bal-cur,.acct-card-primary .acct-card-bal-num{color:white;}
+.acct-card-secondary .acct-card-bal-cur,.acct-card-secondary .acct-card-bal-num{color:white;}
+.acct-card-eye{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;flex-shrink:0;}
+.acct-card-eye svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.acct-card-foot{display:flex;justify-content:space-between;align-items:flex-end;}
+.acct-card-acc-lbl{font-size:10px;font-weight:600;opacity:0.6;}
+.acct-card-acc-num{font-size:14px;font-weight:800;letter-spacing:1px;}
+.acct-card-primary .acct-card-acc-lbl,.acct-card-primary .acct-card-acc-num{color:white;}
+.acct-card-secondary .acct-card-acc-lbl,.acct-card-secondary .acct-card-acc-num{color:white;}
+/* decorative circle */
+.acct-card::before{
+  content:'';position:absolute;
+  width:180px;height:180px;border-radius:50%;
+  top:-60px;right:-50px;
+  background:rgba(255,255,255,0.07);
+  pointer-events:none;
+}
+.acct-card::after{
+  content:'';position:absolute;
+  width:120px;height:120px;border-radius:50%;
+  bottom:-40px;right:40px;
+  background:rgba(255,255,255,0.05);
+  pointer-events:none;
+}
+/* card slider */
+.acct-slider{display:flex;gap:12px;padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.acct-slider::-webkit-scrollbar{display:none;}
+.acct-slider-item{flex:0 0 calc(100% - 32px);scroll-snap-align:start;}
+.acct-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 0;}
+.acct-dot{width:6px;height:6px;border-radius:50%;background:#E0E0E0;transition:background 0.2s,width 0.2s;}
+.acct-dot.on{background:var(--red);width:18px;border-radius:3px;}
+
+/* LOGIN SCREEN */
+.login-screen{display:none;flex-direction:column;flex:1;overflow:hidden;background:white;}
+.login-screen.active{display:flex;}
+.login-hero{background:var(--red);padding:52px 28px 40px;flex-shrink:0;}
+.login-hero-eyebrow{color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.login-hero-title{color:white;font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:6px;}
+.login-hero-sub{color:rgba(255,255,255,0.65);font-size:14px;}
+/* full page scroll — hero + form scroll together */
+.login-scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+.login-scroll::-webkit-scrollbar{display:none;}
+.login-body{padding:28px 24px 40px;display:flex;flex-direction:column;gap:0;background:white;}
+.login-input-group{margin-bottom:18px;}
+.login-input-label{font-size:12px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:8px;}
+.login-input{width:100%;padding:16px 18px;border-radius:16px;border:1.5px solid #E8E8E8;font-family:var(--font);font-size:15px;font-weight:600;color:var(--txt);background:#F9F9F9;outline:none;transition:border-color 0.2s,background 0.2s;}
+.login-input:focus{border-color:var(--red);background:white;}
+.login-input::placeholder{color:#BBBBBB;font-weight:500;}
+.login-btn-main{width:100%;padding:18px;border-radius:100px;border:none;background:var(--red);color:white;font-size:17px;font-weight:800;cursor:pointer;font-family:var(--font);letter-spacing:-0.2px;margin-bottom:20px;transition:opacity 0.15s,transform 0.1s;}
+.login-btn-main:active{transform:scale(0.98);}
+.login-divider{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.login-divider span{font-size:13px;color:var(--txt3);white-space:nowrap;}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:#EBEBEB;}
+.login-bio-row{display:flex;gap:10px;margin-bottom:24px;}
+.login-bio-btn{flex:1;padding:14px;border-radius:16px;border:1.5px solid #E8E8E8;background:white;font-family:var(--font);font-size:13px;font-weight:700;color:var(--txt);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:border-color 0.2s;}
+.login-bio-btn:hover{border-color:var(--red);}
+.login-forgot{text-align:center;font-size:14px;font-weight:700;color:var(--red);cursor:pointer;margin-bottom:24px;}
+.login-security{text-align:center;font-size:12px;color:var(--txt3);display:flex;align-items:center;justify-content:center;gap:5px;}
+
+/* SOFT TOKEN — fix scrollable layout */
+.soft-token-screen{position:absolute;inset:0;background:white;z-index:250;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.25s;overflow:hidden;}
+.soft-token-screen.show{opacity:1;pointer-events:all;}
+.st-scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;}
+.st-scroll::-webkit-scrollbar{display:none;}
+
+/* APPROVAL BANNER */
+.apv-banner{margin:16px 16px 0;background:#FFF8E6;border-radius:20px;padding:14px 18px;display:flex;align-items:center;gap:12px;border:1px solid rgba(230,168,23,0.2);cursor:pointer;}
+.apv-dot{width:10px;height:10px;border-radius:50%;background:#E6A817;flex-shrink:0;}
+.apv-bi{flex:1;}
+.apv-bi b{display:block;font-size:14px;font-weight:700;color:#7A5C1E;}
+.apv-bi small{font-size:12px;color:#A07830;}
+
+/* AFC */
+.afc-metric{flex:1;background:#F9F9F9;border-radius:10px;padding:10px;}
+.afc-metric-label{font-size:10px;color:var(--txt3);font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:3px;}
+.afc-metric-value{font-size:13px;font-weight:700;color:var(--txt);}
+
+</style>
+</head>
+<body>
+<div class="phone">
+
+<!-- ══════════════ LOGIN SCREEN ══════════════ -->
+<div class="login-screen active" id="s-login">
+  <div class="sb" style="background:var(--red);padding-bottom:0;">
+    <span style="color:white;">9:41</span>
+    <div class="sb-icons">
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="white"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 3C10 3 11.8 3.8 13.1 5.1L14.5 3.7C12.8 2 10.5 1 8 1C5.5 1 3.2 2 1.5 3.7L2.9 5.1C4.2 3.8 6 3 8 3Z"/><path d="M8 6C9.3 6 10.5 6.5 11.4 7.4L12.8 6C11.5 4.7 9.8 4 8 4C6.2 4 4.5 4.7 3.2 6L4.6 7.4C5.5 6.5 6.7 6 8 6Z"/><circle cx="8" cy="10.5" r="1.5"/></svg>
+      <span style="font-size:12px;font-weight:700;color:white;">97%</span>
+    </div>
+  </div>
+  <div class="login-scroll">
+    <div class="login-hero">
+      <div class="login-hero-eyebrow">
+        <svg width="16" height="16" viewBox="0 0 20 20" style="flex-shrink:0;"><path d="M11.5 3.5C8.8 3.5 6.5 5.3 5.5 7.8C6.2 7.5 7 7.4 7.8 7.4C11.2 7.4 14 10.2 14 13.6C14 14.4 13.8 15.2 13.5 15.9C15.8 14.8 17.4 12.5 17.4 9.8C17.4 6.3 14.8 3.5 11.5 3.5Z" fill="rgba(255,255,255,0.7)"/></svg>
+        Bank Islam ProMobile
+      </div>
+      <div class="login-hero-title">Peace Be Upon You,<br>Welcome Back</div>
+      <div class="login-hero-sub">Sign in to your business account</div>
+    </div>
+    <div class="login-body">
+      <div class="login-input-group">
+        <div class="login-input-label">Corporate ID / Username</div>
+        <input class="login-input" type="text" value="BIZ-2024-001234" placeholder="BIZ-XXXX-XXXXXX">
+      </div>
+      <div class="login-input-group" style="margin-bottom:24px;">
+        <div class="login-input-label">Password</div>
+        <input class="login-input" type="password" value="••••••••••" placeholder="Enter your password">
+      </div>
+      <button class="login-btn-main" onclick="showScreen('s-home')">
+        🔐 Sign In Securely
+      </button>
+      <div class="login-divider"><span>or</span></div>
+      <div class="login-bio-row">
+        <button class="login-bio-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10c-1.7 0-3 1.3-3 3 0 .9.4 1.7 1 2.3"/><path d="M12 4C7 4 3 8.5 3 13"/><path d="M21 13c0-4.5-4-9-9-9"/><path d="M5.6 17C6.8 19.4 9.2 21 12 21s5.2-1.6 6.4-4"/><path d="M12 7c-2.8 0-5 2-5 5"/><path d="M17 12c0-2.8-2.2-5-5-5"/></svg>
+          Fingerprint
+        </button>
+        <button class="login-bio-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Face ID
+        </button>
+      </div>
+      <div class="login-forgot">Forgot Password / Unlock Account</div>
+      <div class="login-security">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-bit SSL · BIMB Secure Protected
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="screen" id="s-home">
+  <div class="sb">
+    <span>9:41</span>
+    <div class="sb-icons">
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="#1A1A1A"><rect x="0" y="4" width="3" height="8" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="#1A1A1A"><path d="M8 3C10 3 11.8 3.8 13.1 5.1L14.5 3.7C12.8 2 10.5 1 8 1C5.5 1 3.2 2 1.5 3.7L2.9 5.1C4.2 3.8 6 3 8 3Z"/><path d="M8 6C9.3 6 10.5 6.5 11.4 7.4L12.8 6C11.5 4.7 9.8 4 8 4C6.2 4 4.5 4.7 3.2 6L4.6 7.4C5.5 6.5 6.7 6 8 6Z"/><circle cx="8" cy="10.5" r="1.5"/></svg>
+      <span style="font-size:12px;font-weight:700;">97%</span>
+    </div>
+  </div>
+  <div class="scr">
+    <!-- Welcome header + notification + avatar -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:16px 24px 0;">
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--txt3);margin-bottom:2px;">Peace be upon you,</div>
+        <div style="font-size:20px;font-weight:900;letter-spacing:-0.5px;color:var(--txt);">Encik Ahmad Razif</div>
+        <div style="font-size:11px;color:var(--txt3);margin-top:2px;">BIZ-001234</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:#F0F0F0;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div style="position:absolute;top:-1px;right:-1px;width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--bg);"></div>
+        </div>
+        <!-- AR avatar -->
+        <div onclick="showScreen('s-more')" style="width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:white;cursor:pointer;letter-spacing:-0.5px;">AR</div>
+      </div>
+    </div>
+
+    <!-- Balance -->
+    <div style="padding:18px 24px 0;">
+      <div class="eyebrow" style="margin-bottom:6px;">Total balance</div>
+      <div style="display:flex;align-items:baseline;gap:4px;">
+        <span style="font-size:20px;font-weight:700;color:var(--txt);">RM</span>
+        <span style="font-size:42px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--txt);">1,247,892.50</span>
+      </div>
+      <div style="font-size:13px;color:var(--txt3);margin-top:5px;">Current Account · •••• 4821</div>
+    </div>
+
+    <!-- 3 action pills — More removed -->
+    <div style="display:flex;gap:8px;padding:18px 24px 0;flex-wrap:nowrap;">
+      <button class="pill pill-red" onclick="showQR('static')" style="flex:0 0 auto;gap:6px;padding:10px 16px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3M14 17h3M17 14v3M20 14v7M20 17h-3"/></svg>
+        Scan
+      </button>
+      <button class="pill pill-red-soft" onclick="" style="flex:0 0 auto;padding:10px 18px;">Transfer</button>
+      <button class="pill pill-red-soft" onclick="showScreen('s-approve')" style="flex:0 0 auto;padding:10px 18px;">Approve</button>
+    </div>
+
+    <!-- Single account card -->
+    <div style="padding:16px 0 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:0 24px 10px;">
+        <div style="font-size:13px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;">My Account</div>
+        <div style="font-size:13px;font-weight:700;color:var(--red);cursor:pointer;" onclick="showScreen('s-accounts')">View details</div>
+      </div>
+      <div style="padding:0 16px;">
+        <div class="acct-card acct-card-primary" onclick="showScreen('s-accounts')">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+            <div>
+              <div class="acct-card-label">Current Account</div>
+              <div class="acct-card-type">Wadiah · Active</div>
+            </div>
+            <button class="acct-card-eye" onclick="event.stopPropagation();toggleBalance(0)" id="eyeBtn0">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="acct-card-bal-row">
+            <div class="acct-card-bal" id="balDisplay0">
+              <span class="acct-card-bal-cur">RM</span>
+              <span class="acct-card-bal-num">892,400.00</span>
+            </div>
+          </div>
+          <div class="acct-card-foot">
+            <div>
+              <div class="acct-card-acc-lbl">Account number</div>
+              <div class="acct-card-acc-num" style="letter-spacing:1.5px;font-size:13px;">1234 5678 9012 4821</div>
+            </div>
+            <div style="opacity:0.5;">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="4" width="8" height="8" fill="white" rx="1"/><rect x="18" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="20" y="4" width="8" height="8" fill="white" rx="1"/><rect x="2" y="18" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="4" y="20" width="8" height="8" fill="white" rx="1"/><rect x="18" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="18" width="5" height="5" fill="white" rx="0.5"/><rect x="18" y="25" width="5" height="5" fill="white" rx="0.5"/><rect x="25" y="25" width="5" height="5" fill="white" rx="0.5"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tasks — Wise style with red-tinted background -->
+    <div class="section-hd" style="padding-bottom:12px;">Tasks</div>
+    <div class="task-card" style="background:#FBE9EE;border:1px solid rgba(220,42,84,0.12);">
+      <div class="task-card-ico" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" style="stroke:white;"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
+      <div class="task-card-inf">
+        <div class="task-card-title" style="color:var(--red-d);">3 transactions need approval</div>
+        <div class="task-card-sub" style="color:#8B3050;">Up to RM 367,480.00 is awaiting your sign-off. Review and authorise today.</div>
+        <div class="task-card-actions">
+          <button class="pill pill-red" style="font-size:13px;padding:9px 16px;" onclick="showScreen('s-approve')">Review now</button>
+          <button class="pill" style="font-size:13px;padding:9px 16px;background:rgba(220,42,84,0.1);color:var(--red);">Dismiss</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent transactions -->
+    <div class="section-hd">Transactions</div>
+    <div style="background:white;border-radius:20px;margin:0 16px;">
+      <div class="txn">
+        <div class="txn-ico">🏭</div>
+        <div class="txn-inf">
+          <div class="txn-nm">AK Sdn Bhd</div>
+          <div class="txn-meta">Today <div class="txn-dot"></div> 9:14 AM</div>
+        </div>
+        <div class="txn-amt">
+          <div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">48,000.00</span></div>
+          <small>Approved</small>
+        </div>
+      </div>
+      <div class="txn">
+        <div class="txn-ico">🏪</div>
+        <div class="txn-inf">
+          <div class="txn-nm">Ampang Store</div>
+          <div class="txn-meta">Today <div class="txn-dot"></div> 8:52 AM</div>
+        </div>
+        <div class="txn-amt">
+          <div class="amt-inline"><span class="amt-currency cr" style="font-size:13px;">+RM</span><span class="amt-value cr">3,240.00</span></div>
+          <small>Received</small>
+        </div>
+      </div>
+      <div class="txn" style="border-bottom:none;">
+        <div class="txn-ico">👔</div>
+        <div class="txn-inf">
+          <div class="txn-nm">24 Employees</div>
+          <div class="txn-meta">Yesterday <div class="txn-dot"></div> 5:00 PM</div>
+        </div>
+        <div class="txn-amt">
+          <div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">125,400.00</span></div>
+          <small>Approved</small>
+        </div>
+      </div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn active" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn" onclick="showScreen('s-biz')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ ACCOUNTS ══════════════ -->
+<div class="screen" id="s-accounts">
+  <div class="sb"><span>9:41</span><div class="sb-icons"><span style="font-size:12px;font-weight:700;">97%</span></div></div>
+  <div class="scr">
+    <div style="padding:12px 24px 16px;">
+      <div class="eyebrow" style="margin-bottom:8px;">My account</div>
+      <div style="display:flex;align-items:baseline;gap:4px;">
+        <span style="font-size:18px;font-weight:700;color:var(--txt);">RM</span>
+        <span style="font-size:34px;font-weight:900;letter-spacing:-1.5px;color:var(--txt);">892,400.00</span>
+      </div>
+      <div style="font-size:13px;color:var(--txt3);margin-top:4px;">Available balance</div>
+    </div>
+
+    <!-- Account detail card with full number -->
+    <div style="margin:0 16px;background:white;border-radius:22px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+      <div style="padding:16px 20px 12px;border-bottom:1px solid #F5F5F5;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="acc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+          <div style="flex:1;">
+            <div style="font-size:15px;font-weight:800;color:var(--txt);">Current Account</div>
+            <div style="font-size:12px;color:var(--txt3);margin-top:3px;letter-spacing:1px;font-weight:600;">1234 5678 9012 4821</div>
+          </div>
+          <span class="list-badge lb-active">Active</span>
+        </div>
+      </div>
+      <div style="padding:14px 20px;">
+        <div style="display:flex;gap:10px;margin-bottom:10px;">
+          <div class="afc-metric"><div class="afc-metric-label">Today in</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:#12A05C;">+RM</span><span style="font-size:14px;font-weight:800;color:#12A05C;">43,240.00</span></div></div>
+          <div class="afc-metric"><div class="afc-metric-label">Today out</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:var(--red);">−RM</span><span style="font-size:14px;font-weight:800;color:var(--red);">48,000.00</span></div></div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <div class="afc-metric"><div class="afc-metric-label">Profit rate</div><div class="afc-metric-value">1.80% p.a.</div></div>
+          <div class="afc-metric"><div class="afc-metric-label">Account type</div><div class="afc-metric-value">Wadiah</div></div>
+        </div>
+      </div>
+      <div style="padding:0 12px 14px;display:flex;gap:8px;">
+        <button class="pill pill-red" style="font-size:13px;padding:9px 18px;">Transfer</button>
+        <button class="pill pill-ghost" style="font-size:13px;padding:9px 18px;">Statement</button>
+        <button class="pill pill-ghost" style="font-size:13px;padding:9px 18px;">Details</button>
+      </div>
+    </div>
+
+    <!-- Spending chart card -->
+    <div style="padding:20px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Spending overview</div>
+    <div style="margin:0 16px;background:white;border-radius:22px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+      <!-- Month selector -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:800;color:var(--txt);">May 2025</div>
+        <div style="display:flex;gap:6px;">
+          <button style="padding:5px 12px;border-radius:100px;border:none;background:#F5F5F5;font-size:12px;font-weight:700;color:var(--txt3);cursor:pointer;font-family:var(--font);">3M</button>
+          <button style="padding:5px 12px;border-radius:100px;border:none;background:var(--red);font-size:12px;font-weight:700;color:white;cursor:pointer;font-family:var(--font);">1M</button>
+          <button style="padding:5px 12px;border-radius:100px;border:none;background:#F5F5F5;font-size:12px;font-weight:700;color:var(--txt3);cursor:pointer;font-family:var(--font);">1W</button>
+        </div>
+      </div>
+      <!-- Legend -->
+      <div style="display:flex;gap:16px;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#12A05C;"></div><span style="font-size:12px;color:var(--txt3);">Money in</span></div>
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div><span style="font-size:12px;color:var(--txt3);">Money out</span></div>
+      </div>
+      <!-- SVG Bar Chart -->
+      <svg viewBox="0 0 310 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <!-- Y gridlines -->
+        <line x1="0" y1="10" x2="310" y2="10" stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="40" x2="310" y2="40" stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="70" x2="310" y2="70" stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="100" x2="310" y2="100" stroke="#F5F5F5" stroke-width="1"/>
+        <!-- Y labels -->
+        <text x="0" y="9" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB">500K</text>
+        <text x="0" y="39" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB">300K</text>
+        <text x="0" y="69" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB">150K</text>
+        <text x="0" y="99" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB">50K</text>
+        <!-- Week 1 -->
+        <rect x="24" y="52" width="14" height="48" rx="5" fill="#12A05C" opacity="0.9"/>
+        <rect x="40" y="68" width="14" height="32" rx="5" fill="#DC2A54" opacity="0.9"/>
+        <!-- Week 2 -->
+        <rect x="82" y="30" width="14" height="70" rx="5" fill="#12A05C" opacity="0.9"/>
+        <rect x="98" y="50" width="14" height="50" rx="5" fill="#DC2A54" opacity="0.9"/>
+        <!-- Week 3 -->
+        <rect x="140" y="20" width="14" height="80" rx="5" fill="#12A05C" opacity="0.9"/>
+        <rect x="156" y="42" width="14" height="58" rx="5" fill="#DC2A54" opacity="0.9"/>
+        <!-- Week 4 -->
+        <rect x="198" y="45" width="14" height="55" rx="5" fill="#12A05C" opacity="0.9"/>
+        <rect x="214" y="60" width="14" height="40" rx="5" fill="#DC2A54" opacity="0.9"/>
+        <!-- Week 5 (partial) -->
+        <rect x="256" y="72" width="14" height="28" rx="5" fill="#12A05C" opacity="0.5"/>
+        <rect x="272" y="80" width="14" height="20" rx="5" fill="#DC2A54" opacity="0.5"/>
+        <!-- X labels -->
+        <text x="25" y="115" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB" text-anchor="middle">W1</text>
+        <text x="83" y="115" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB" text-anchor="middle">W2</text>
+        <text x="141" y="115" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB" text-anchor="middle">W3</text>
+        <text x="199" y="115" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB" text-anchor="middle">W4</text>
+        <text x="257" y="115" font-family="Inter,sans-serif" font-size="8" fill="#BBBBBB" text-anchor="middle">W5</text>
+      </svg>
+      <!-- Totals row -->
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <div style="flex:1;background:#E7FAF1;border-radius:14px;padding:12px;">
+          <div style="font-size:10px;font-weight:700;color:#12A05C;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Total in</div>
+          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:#12A05C;">+RM</span><span style="font-size:16px;font-weight:900;color:#12A05C;letter-spacing:-0.5px;">248,240.00</span></div>
+        </div>
+        <div style="flex:1;background:var(--red-l);border-radius:14px;padding:12px;">
+          <div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Total out</div>
+          <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:11px;font-weight:700;color:var(--red);">−RM</span><span style="font-size:16px;font-weight:900;color:var(--red);letter-spacing:-0.5px;">173,400.00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:20px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Account settings</div>
+    <div class="set-group">
+      <div class="set-row"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="set-inf"><div class="set-nm">Transaction limits</div><div class="set-sub">Daily: RM 500,000.00</div></div><span class="set-val">›</span></div>
+      <div class="set-row"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="set-inf"><div class="set-nm">Maker-Checker rules</div><div class="set-sub">2 approvers above RM 50,000.00</div></div><span class="set-val">›</span></div>
+      <div class="set-row"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="set-inf"><div class="set-nm">Scheduled payments</div><div class="set-sub">3 active schedules</div></div><span class="set-val">›</span></div>
+      <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div><div class="set-inf"><div class="set-nm">Account statements</div><div class="set-sub">Download e-statements</div></div><span class="set-val">›</span></div>
+    </div>
+
+    <div style="padding:4px 24px 10px;font-size:18px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Transactions</div>
+    <div style="background:white;border-radius:20px;margin:0 16px;">
+      <div class="txn"><div class="txn-ico">🏭</div><div class="txn-inf"><div class="txn-nm">AK Sdn Bhd</div><div class="txn-meta">Today <div class="txn-dot"></div> 9:14 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">48,000.00</span></div><small>IBG Out</small></div></div>
+      <div class="txn"><div class="txn-ico">🏪</div><div class="txn-inf"><div class="txn-nm">Ampang Store</div><div class="txn-meta">Today <div class="txn-dot"></div> 8:52 AM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency cr" style="font-size:13px;">+RM</span><span class="amt-value cr">3,240.00</span></div><small>DuitNow In</small></div></div>
+      <div class="txn" style="border-bottom:none;"><div class="txn-ico">👔</div><div class="txn-inf"><div class="txn-nm">24 Employees</div><div class="txn-meta">Yesterday <div class="txn-dot"></div> 5:00 PM</div></div><div class="txn-amt"><div class="amt-inline"><span class="amt-currency dr" style="font-size:13px;">−RM</span><span class="amt-value dr">125,400.00</span></div><small>IBG Out</small></div></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn active" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn" onclick="showScreen('s-biz')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ APPROVALS ══════════════ -->
+<div class="screen" id="s-approve">
+  <div class="sb"><span>9:41</span><div class="sb-icons"><span style="font-size:12px;font-weight:700;">97%</span></div></div>
+  <div class="scr">
+    <div style="padding:8px 24px 8px;">
+      <div class="eyebrow" style="margin-bottom:8px;">Authorisation</div>
+      <div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Pending approvals</div>
+      <div style="font-size:13px;color:var(--txt3);margin-top:4px;">3 transactions awaiting your sign-off</div>
+    </div>
+
+    <!-- Soft Token entry point -->
+    <div style="margin:12px 16px;background:var(--red-l);border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="showSoftToken('Pembinaan Jaya Sdn Bhd','75000.00','IBG Transfer')">
+      <div style="width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:800;color:var(--red);">BIMB Secure</div>
+        <div style="font-size:12px;color:var(--red-d);">Tap to view your authorisation code</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+
+    <div class="apv-card">
+      <div class="apv-top"><span class="apv-tag tf">IBG Transfer</span><span class="apv-pend">⏳ Awaiting</span></div>
+      <div class="apv-name">Pembinaan Jaya Sdn Bhd</div>
+      <div class="apv-bank">Maybank · 5142-8821-0034</div>
+      <div class="apv-by">Pn. Suraya · 4 May 2025 <span style="margin:0 3px;">·</span> 3:45 PM</div>
+      <div class="apv-foot">
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">75,000.00</span></div>
+        <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('Pembinaan Jaya Sdn Bhd','75,000.00')">Approve</button></div>
+      </div>
+    </div>
+
+    <div class="apv-card">
+      <div class="apv-top"><span class="apv-tag bp">Bill Payment</span><span class="apv-pend">⏳ Awaiting</span></div>
+      <div class="apv-name">TNB Commercial</div>
+      <div class="apv-bank">Acc: 200349821 · Ref: INV-2025-0492</div>
+      <div class="apv-by">En. Razif · 4 May 2025 <span style="margin:0 3px;">·</span> 2:10 PM</div>
+      <div class="apv-foot">
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">12,480.00</span></div>
+        <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('TNB Commercial','12,480.00')">Approve</button></div>
+      </div>
+    </div>
+
+    <div class="apv-card">
+      <div class="apv-top"><span class="apv-tag rt">RENTAS</span><span class="apv-pend">⏳ Awaiting</span></div>
+      <div class="apv-name">Global Trade Partners (M) Bhd</div>
+      <div class="apv-bank">CIMB Bank · 7041-8823-0012</div>
+      <div class="apv-by">En. Hazwan · 3 May 2025 <span style="margin:0 3px;">·</span> 4:55 PM</div>
+      <div class="apv-foot">
+        <div class="apv-amount"><span class="amt-currency">RM</span><span class="amt-value" style="font-size:22px;font-weight:900;letter-spacing:-0.8px;">280,000.00</span></div>
+        <div class="apv-btns"><button class="btn-rej">Reject</button><button class="btn-apv" onclick="showTotp('Global Trade Partners (M) Bhd','280,000.00')">Approve</button></div>
+      </div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+
+  <!-- TOTP sheet -->
+  <div class="overlay" id="totpOv" onclick="dismissOv(event,'totpOv')">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title">Authorise transfer</div>
+      <div class="sheet-sub">Enter your BIMB Secure code to confirm</div>
+      <div class="totp-box">
+        <div class="totp-lbl">Approving payment to</div>
+        <div class="totp-val-row"><span class="totp-val-cur">RM</span><span class="totp-val-num" id="tAmt">75,000.00</span></div>
+        <div class="totp-rcp" id="tRcp">Pembinaan Jaya Sdn Bhd</div>
+      </div>
+      <div class="totp-hdr">
+        <span class="totp-clbl">BIMB Secure code</span>
+        <span class="totp-tmr" id="tTimer">30s</span>
+      </div>
+      <div class="totp-digits" id="tDigits">
+        <div class="td">4</div><div class="td">8</div><div class="td">2</div>
+        <div class="td">1</div><div class="td">9</div><div class="td">7</div>
+      </div>
+      <div class="totp-prog"><div class="totp-prog-fill" id="tBar" style="width:100%;"></div></div>
+      <button class="btn-full" onclick="confirmApproval()">Confirm approval</button>
+    </div>
+  </div>
+
+  <!-- SOFT TOKEN full-screen — scrollable so button is always reachable -->
+  <div class="soft-token-screen" id="softToken">
+    <!-- Fixed header -->
+    <div class="st-header" style="flex-shrink:0;">
+      <button onclick="hideSoftToken()" style="align-self:flex-start;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;color:rgba(255,255,255,0.8);font-size:13px;font-weight:700;font-family:var(--font);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+      <div class="st-header-title">BIMB Secure</div>
+      <div class="st-header-name" id="stTxnName">Pembinaan Jaya Sdn Bhd</div>
+      <div class="st-header-bank">Bank Islam ProMobile · •••• 4821</div>
+    </div>
+    <!-- Scrollable body -->
+    <div class="st-scroll">
+      <div style="display:flex;flex-direction:column;align-items:center;padding:28px 28px 0;">
+        <div class="st-label">Your one-time code</div>
+        <!-- Ring timer -->
+        <div class="st-ring">
+          <svg viewBox="0 0 80 80">
+            <circle class="st-ring-bg" cx="40" cy="40" r="35"/>
+            <circle class="st-ring-fill" id="stRingFill" cx="40" cy="40" r="35"/>
+          </svg>
+          <div class="st-ring-text" id="stRingNum">30</div>
+        </div>
+        <!-- 6 digits -->
+        <div class="st-code-row" id="stDigits">
+          <div class="st-digit">4</div>
+          <div class="st-digit">8</div>
+          <div class="st-digit">2</div>
+          <div class="st-digit">1</div>
+          <div class="st-digit">9</div>
+          <div class="st-digit">7</div>
+        </div>
+        <div class="st-hint">This code refreshes every 30 seconds. Do not share it with anyone.</div>
+
+        <!-- Transaction details -->
+        <div class="st-txn-box" style="margin-bottom:0;">
+          <div class="st-txn-row"><span class="st-txn-lbl">Transaction type</span><span class="st-txn-val" id="stTxnType">IBG Transfer</span></div>
+          <div class="st-txn-row"><span class="st-txn-lbl">Payee</span><span class="st-txn-val" id="stTxnPayee">Pembinaan Jaya Sdn Bhd</span></div>
+          <div class="st-txn-row"><span class="st-txn-lbl">Initiated by</span><span class="st-txn-val">Pn. Suraya</span></div>
+          <div class="st-txn-row">
+            <span class="st-txn-lbl">Amount</span>
+            <span class="st-txn-val big" id="stTxnAmt" style="display:flex;align-items:baseline;gap:3px;"><span style="font-size:13px;">RM</span>75,000.00</span>
+          </div>
+        </div>
+      </div>
+      <!-- Approve button always visible at bottom of scroll -->
+      <div style="padding:20px 28px 36px;">
+        <button class="btn-full" onclick="hideSoftToken();showTotp(document.getElementById('stTxnPayee').textContent, document.getElementById('stTxnAmtRaw').value)">Use this code to approve</button>
+      </div>
+    </div>
+    <input type="hidden" id="stTxnAmtRaw" value="75,000.00">
+  </div>
+
+  <!-- Success -->
+  <div class="succ" id="succScreen">
+    <div class="succ-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h2>Approved</h2>
+    <p>Transaction authorised and submitted for processing.</p>
+    <div class="ref">Ref: BI-2025-0492-TXN</div>
+    <button class="btn-full" style="max-width:220px;margin-top:8px;" onclick="closeSucc()">Done</button>
+  </div>
+
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn active"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn" onclick="showScreen('s-biz')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ BIMB BIZ ══════════════ -->
+<div class="screen" id="s-biz">
+  <div class="sb"><span>9:41</span><div class="sb-icons"><span style="font-size:12px;font-weight:700;">97%</span></div></div>
+  <div class="scr">
+    <div style="padding:8px 24px 0;">
+      <div class="eyebrow" style="margin-bottom:6px;">BIMB Biz</div>
+      <div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Merchant portal</div>
+    </div>
+    <div style="margin:16px 16px 0;background:white;border-radius:20px;padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="showScreen('s-stores')">
+      <div style="width:42px;height:42px;border-radius:14px;background:var(--red-l);display:flex;align-items:center;justify-content:center;font-size:22px;">🏪</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:800;color:var(--txt);">Ampang Main Store</div><div style="font-size:12px;color:var(--txt3);">3 outlets · 8 cashiers active</div></div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CCC" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div style="display:flex;gap:10px;padding:14px 16px 0;">
+      <div class="stat">
+        <div class="stat-lbl">Today's sales</div>
+        <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:12px;font-weight:800;color:var(--red);">RM</span><span style="font-size:18px;font-weight:900;letter-spacing:-0.6px;color:var(--red);">20,840.00</span></div>
+        <div class="stat-sub">↑ 12% vs yesterday</div>
+      </div>
+      <div class="stat"><div class="stat-lbl">Transactions</div><div class="stat-val">247</div><div class="stat-sub">All outlets</div></div>
+    </div>
+    <div style="padding:16px 24px 10px;font-size:17px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">DuitNow QR</div>
+    <div style="display:flex;gap:8px;padding:0 16px;">
+      <button class="pill pill-red" onclick="showQR('static')">Static QR</button>
+      <button class="pill pill-ghost" onclick="showQR('dynamic')">Dynamic QR</button>
+    </div>
+    <div style="padding:16px 24px 10px;font-size:17px;font-weight:800;letter-spacing:-0.3px;color:var(--txt);">Merchant tools</div>
+    <div class="biz-grid">
+      <div class="biz-tile" onclick="showScreen('s-stores')"><div class="biz-tile-ico b"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="biz-tile-nm">Manage Stores</div><div class="biz-tile-ds">View and edit outlets</div></div></div>
+      <div class="biz-tile" onclick="showScreen('s-cashiers')"><div class="biz-tile-ico g"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="biz-tile-nm">Cashiers</div><div class="biz-tile-ds">Manage cashier accounts</div></div></div>
+      <div class="biz-tile"><div class="biz-tile-ico p"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="biz-tile-nm">Sales Report</div><div class="biz-tile-ds">Daily and monthly trends</div></div></div>
+      <div class="biz-tile"><div class="biz-tile-ico r"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="biz-tile-nm">Terminal</div><div class="biz-tile-ds">Cashier POS view</div></div></div>
+    </div>
+    <div style="margin:16px 16px 0;background:white;border-radius:20px;padding:18px 20px;">
+      <div style="font-size:15px;font-weight:800;color:var(--txt);margin-bottom:16px;">Outlet performance today</div>
+      <div class="ob"><div class="ob-top"><span class="ob-nm">Ampang Main Store</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">12,400.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:60%;background:var(--red);"></div></div></div>
+      <div class="ob"><div class="ob-top"><span class="ob-nm">Cheras Branch</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">5,840.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:28%;background:#E6A817;"></div></div></div>
+      <div class="ob" style="margin-bottom:0;"><div class="ob-top"><span class="ob-nm">Petaling Jaya</span><div class="ob-val-row"><span class="ob-val-cur">RM</span><span class="ob-val-num">2,600.00</span></div></div><div class="ob-track"><div class="ob-fill" style="width:13%;background:#AAAAAA;"></div></div></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn active"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ STORES ══════════════ -->
+<div class="screen" id="s-stores">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Manage Stores</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">3 active outlets</div></div>
+    <div style="padding:0 16px 12px;"><button class="pill pill-red" style="width:100%;justify-content:center;" onclick="showScreen('s-add-store')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add new store</button></div>
+    <div style="background:white;border-radius:22px;margin:0 16px;overflow:hidden;">
+      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Ampang Main Store</div><div class="list-sub">BI-40921 · 4 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">12,400.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+      <div class="list-item" onclick="showScreen('s-store-detail')"><div class="list-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Cheras Branch</div><div class="list-sub">BI-40922 · 3 cashiers</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">5,840.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+      <div class="list-item" style="border-bottom:none;"><div class="list-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#999"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="list-inf"><div class="list-nm">Petaling Jaya</div><div class="list-sub">BI-40923 · 1 cashier</div></div><div style="text-align:right;"><span class="list-badge lb-active">Active</span><div style="display:flex;align-items:baseline;gap:2px;margin-top:4px;justify-content:flex-end;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,600.00 today</span></div></div><span style="color:#CCC;margin-left:4px;">›</span></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn active"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ STORE DETAIL ══════════════ -->
+<div class="screen" id="s-store-detail">
+  <div class="sb" style="background:var(--red);"><span style="color:white;opacity:0.6;font-size:12px;">9:41</span></div>
+  <div class="scr">
+    <div style="background:var(--red);padding:8px 24px 24px;">
+      <button class="back-btn" onclick="showScreen('s-stores')" style="color:rgba(255,255,255,0.8);"><svg viewBox="0 0 24 24" style="stroke:white;"><polyline points="15 18 9 12 15 6"/></svg>Stores</button>
+      <div style="color:rgba(255,255,255,0.7);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:12px;">Outlet details</div>
+      <div style="color:white;font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-top:4px;">Ampang Main Store</div>
+      <div style="color:rgba(255,255,255,0.65);font-size:13px;">Merchant ID: BI-40921</div>
+    </div>
+    <div style="display:flex;gap:10px;padding:16px 16px 0;">
+      <div class="stat"><div class="stat-lbl">Today's sales</div><div style="display:flex;align-items:baseline;gap:2px;"><span style="font-size:12px;font-weight:800;color:var(--txt);">RM</span><span style="font-size:18px;font-weight:900;color:var(--txt);">12,400.00</span></div><div class="stat-sub">↑ 8% vs yesterday</div></div>
+      <div class="stat"><div class="stat-lbl">Transactions</div><div class="stat-val">148</div><div class="stat-sub">Today</div></div>
+    </div>
+    <div style="margin:14px 16px 0;background:white;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
+      <div style="width:50px;height:50px;background:var(--red-l);border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3M14 17h3M17 14v3M20 14v7M20 17h-3"/></svg></div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:800;color:var(--txt);">Store DuitNow QR</div><div style="font-size:12px;color:var(--txt3);">Static · Share with customers</div></div>
+      <button class="pill pill-red" style="font-size:12px;padding:8px 14px;" onclick="showQR('static')">View QR</button>
+    </div>
+    <div style="padding:16px 24px 10px;font-size:16px;font-weight:800;letter-spacing:-0.2px;color:var(--txt);">Cashiers <span style="font-size:13px;font-weight:600;color:var(--txt3);">4 active</span></div>
+    <div style="background:white;border-radius:20px;margin:0 16px;">
+      <div class="list-item"><div class="cashier-av" style="background:#DC2A54;">AM</div><div class="list-inf"><div class="list-nm">Ahmad Muaz</div><div class="list-sub">CSH-001 · Active now</div></div><span class="list-badge lb-active">Online</span></div>
+      <div class="list-item"><div class="cashier-av" style="background:#1570B8;">SR</div><div class="list-inf"><div class="list-nm">Siti Rahmah</div><div class="list-sub">CSH-002 · 1h ago</div></div><span class="list-badge lb-inactive">Offline</span></div>
+      <div class="list-item" style="border-bottom:none;"><div class="cashier-av" style="background:#12A05C;">FH</div><div class="list-inf"><div class="list-nm">Farid Hazwan</div><div class="list-sub">CSH-003 · Active now</div></div><span class="list-badge lb-active">Online</span></div>
+    </div>
+    <div style="padding:14px 16px 0;"><button class="pill pill-ghost" style="width:100%;justify-content:center;" onclick="showScreen('s-cashiers')">Manage all cashiers</button></div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn active"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ CASHIERS ══════════════ -->
+<div class="screen" id="s-cashiers">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div class="eyebrow" style="margin-top:8px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">Cashiers</div><div style="font-size:13px;color:var(--txt3);margin-top:4px;">8 cashiers across 3 outlets</div></div>
+    <div style="padding:0 16px 12px;"><button class="pill pill-red" style="width:100%;justify-content:center;" onclick="showScreen('s-add-cashier')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Create cashier account</button></div>
+    <div style="display:flex;gap:8px;padding:0 16px 14px;overflow-x:auto;">
+      <button class="pill pill-red" style="font-size:12px;padding:7px 14px;">All (8)</button>
+      <button class="pill pill-ghost" style="font-size:12px;padding:7px 14px;flex-shrink:0;">Ampang (4)</button>
+      <button class="pill pill-ghost" style="font-size:12px;padding:7px 14px;flex-shrink:0;">Cheras (3)</button>
+      <button class="pill pill-ghost" style="font-size:12px;padding:7px 14px;flex-shrink:0;">PJ (1)</button>
+    </div>
+    <div style="background:white;border-radius:22px;margin:0 16px;overflow:hidden;">
+      <div class="list-item"><div class="cashier-av" style="background:#DC2A54;">AM</div><div class="list-inf"><div class="list-nm">Ahmad Muaz</div><div class="list-sub">Ampang · CSH-001</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">3,240.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#1570B8;">SR</div><div class="list-inf"><div class="list-nm">Siti Rahmah</div><div class="list-sub">Ampang · CSH-002</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,180.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#12A05C;">FH</div><div class="list-inf"><div class="list-nm">Farid Hazwan</div><div class="list-sub">Ampang · CSH-003</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">4,110.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#6B3FB5;">NR</div><div class="list-inf"><div class="list-nm">Nur Aisyah</div><div class="list-sub">Cheras · CSH-004</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,870.00</span></div></div></div>
+      <div class="list-item"><div class="cashier-av" style="background:#E6A817;">KA</div><div class="list-inf"><div class="list-nm">Khairul Azri</div><div class="list-sub">Cheras · CSH-005</div></div><div style="text-align:right;"><span class="list-badge lb-inactive">Offline</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">1,640.00</span></div></div></div>
+      <div class="list-item" style="border-bottom:none;"><div class="cashier-av" style="background:#888;">ZH</div><div class="list-inf"><div class="list-nm">Zulaikha Hani</div><div class="list-sub">PJ · CSH-008</div></div><div style="text-align:right;"><span class="list-badge lb-active">Online</span><div style="display:flex;align-items:baseline;gap:2px;justify-content:flex-end;margin-top:3px;"><span style="font-size:10px;color:var(--txt3);">RM</span><span style="font-size:11px;font-weight:700;color:var(--txt3);">2,600.00</span></div></div></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn active"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn" onclick="showScreen('s-more')"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════ ADD CASHIER ══════════════ -->
+<div class="screen" id="s-add-cashier">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-cashiers')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Cashiers</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">Create account</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">New Cashier</div></div>
+    <div style="padding:0 24px;">
+      <div class="input-group"><div class="input-lbl">Full name</div><input class="input-field" type="text" placeholder="e.g. Ahmad bin Ibrahim"></div>
+      <div class="input-group"><div class="input-lbl">IC / Employee ID</div><input class="input-field" type="text" placeholder="e.g. 901234-10-1234"></div>
+      <div class="input-group"><div class="input-lbl">Assigned outlet</div><select class="input-field"><option>Ampang Main Store</option><option>Cheras Branch</option><option>Petaling Jaya</option></select></div>
+      <div class="input-group"><div class="input-lbl">Mobile number</div><input class="input-field" type="tel" placeholder="+60 12-345 6789"></div>
+      <div class="input-group"><div class="input-lbl">PIN (cashier changes on first login)</div><input class="input-field" type="password" placeholder="6-digit PIN"></div>
+      <div style="background:#F5F5F5;border-radius:14px;padding:14px;margin-bottom:20px;"><div style="font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:4px;">Access level: Cashier</div><div style="font-size:12px;color:var(--txt3);line-height:1.5;">Can: Accept QR payments, view own sales<br>Cannot: View other cashier data, manage stores, transfer funds</div></div>
+      <button class="btn-full" onclick="showScreen('s-cashiers')">Create cashier account</button>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ADD STORE ══════════════ -->
+<div class="screen" id="s-add-store">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 20px;"><button class="back-btn" onclick="showScreen('s-stores')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Stores</button><div class="eyebrow" style="margin-top:10px;margin-bottom:6px;">BIMB Biz</div><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);">New Store</div></div>
+    <div style="padding:0 24px;">
+      <div class="input-group"><div class="input-lbl">Store name</div><input class="input-field" type="text" placeholder="e.g. KL Sentral Branch"></div>
+      <div class="input-group"><div class="input-lbl">Business registration no.</div><input class="input-field" type="text" placeholder="e.g. 202001012345"></div>
+      <div class="input-group"><div class="input-lbl">Address line 1</div><input class="input-field" type="text" placeholder="Street address"></div>
+      <div class="input-group"><div class="input-lbl">City</div><input class="input-field" type="text" placeholder="e.g. Kuala Lumpur"></div>
+      <div class="input-group"><div class="input-lbl">Merchant category</div><select class="input-field"><option>Retail — General</option><option>F&B — Restaurant</option><option>Groceries</option><option>Services</option></select></div>
+      <div class="input-group"><div class="input-lbl">Settlement account</div><select class="input-field"><option>Business Current •••• 4821</option></select></div>
+      <button class="btn-full" onclick="showScreen('s-stores')">Register store</button>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ STATIC QR ══════════════ -->
+<div class="screen" id="s-qr-static">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Static QR Code</div><div style="font-size:13px;color:var(--txt3);">Customer scans to pay any amount</div></div>
+    <div class="duitnow-card">
+      <div class="duitnow-header">
+        <div class="duitnow-logo-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/><path d="M9 8s1-1.5 3-1.5 3 1.5 3 3.5-1.5 3.5-3 3.5H9" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>DuitNow QR</div>
+        <div class="duitnow-type">Malaysia National QR</div>
+      </div>
+      <div class="duitnow-qr-area">
+        <svg width="170" height="170" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="20" width="30" height="30" fill="#DC2A54" rx="2"/>
+          <rect x="120" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="130" y="20" width="30" height="30" fill="#DC2A54" rx="2"/>
+          <rect x="10" y="120" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="130" width="30" height="30" fill="#DC2A54" rx="2"/>
+          <rect x="75" y="10" width="8" height="8" fill="#DC2A54"/><rect x="87" y="10" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="22" width="8" height="8" fill="#DC2A54"/><rect x="99" y="16" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="34" width="8" height="8" fill="#DC2A54"/><rect x="87" y="28" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="46" width="8" height="8" fill="#DC2A54"/>
+          <rect x="10" y="75" width="8" height="8" fill="#DC2A54"/><rect x="22" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="34" y="75" width="8" height="8" fill="#DC2A54"/><rect x="46" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="58" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="75" width="8" height="8" fill="#DC2A54"/><rect x="87" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="99" y="75" width="8" height="8" fill="#DC2A54"/><rect x="111" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="123" y="75" width="8" height="8" fill="#DC2A54"/><rect x="135" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="147" y="75" width="8" height="8" fill="#DC2A54"/><rect x="159" y="75" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="87" width="8" height="8" fill="#DC2A54"/><rect x="99" y="87" width="8" height="8" fill="#DC2A54"/>
+          <rect x="111" y="87" width="8" height="8" fill="#DC2A54"/><rect x="135" y="87" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="99" width="8" height="8" fill="#DC2A54"/><rect x="87" y="99" width="8" height="8" fill="#DC2A54"/>
+          <rect x="111" y="99" width="8" height="8" fill="#DC2A54"/><rect x="147" y="99" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="111" width="8" height="8" fill="#DC2A54"/><rect x="99" y="111" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="123" width="8" height="8" fill="#DC2A54"/><rect x="87" y="123" width="8" height="8" fill="#DC2A54"/>
+          <rect x="111" y="123" width="8" height="8" fill="#DC2A54"/><rect x="147" y="123" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="135" width="8" height="8" fill="#DC2A54"/><rect x="135" y="135" width="8" height="8" fill="#DC2A54"/>
+          <rect x="75" y="147" width="8" height="8" fill="#DC2A54"/><rect x="87" y="147" width="8" height="8" fill="#DC2A54"/>
+          <rect x="111" y="147" width="8" height="8" fill="#DC2A54"/><rect x="75" y="159" width="8" height="8" fill="#DC2A54"/>
+        </svg>
+        <div class="duitnow-merchant">Ampang Main Store</div>
+        <div class="duitnow-bank">Bank Islam · •••• 4821</div>
+      </div>
+      <div class="duitnow-footer"><div style="font-size:11px;color:var(--txt3);">Accepted by all participating<br>Banks &amp; e-Wallets</div><div style="font-size:10px;font-weight:700;color:var(--txt3);text-align:right;">Merchant ID<br><span style="color:var(--txt);font-size:12px;">BI-40921</span></div></div>
+    </div>
+    <div style="display:flex;gap:10px;padding:16px;"><button class="pill pill-red" style="flex:1;justify-content:center;">Share QR</button><button class="pill pill-ghost" style="flex:1;justify-content:center;">Download</button></div>
+    <div style="height:12px;"></div>
+  </div>
+</div>
+
+<!-- ══════════════ DYNAMIC QR ══════════════ -->
+<div class="screen" id="s-qr-dynamic">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:8px 24px 16px;"><button class="back-btn" onclick="showScreen('s-biz')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button><div style="font-size:26px;font-weight:900;letter-spacing:-0.8px;color:var(--txt);margin-top:8px;">Dynamic QR</div><div style="font-size:13px;color:var(--txt3);">Set amount for this payment</div></div>
+    <div id="dynAmtEntry">
+      <div style="text-align:center;padding:10px 24px 24px;">
+        <div class="eyebrow" style="margin-bottom:10px;">Enter amount (RM)</div>
+        <input style="font-size:48px;font-weight:900;letter-spacing:-2px;color:var(--txt);text-align:center;width:100%;border:none;background:transparent;font-family:var(--font);outline:none;" id="dynAmtInput" type="number" placeholder="0.00" min="0" step="0.01" oninput="updateDynAmt()">
+        <div style="height:1px;background:#E5E5E5;margin:12px 0;"></div>
+        <div style="font-size:13px;color:var(--txt3);">Ampang Main Store · BI-40921</div>
+      </div>
+      <div style="padding:0 24px;">
+        <div class="input-group"><div class="input-lbl">Reference / Note (optional)</div><input class="input-field" type="text" placeholder="e.g. Invoice #1234"></div>
+        <div class="input-group"><div class="input-lbl">Cashier</div><select class="input-field"><option>Ahmad Muaz (CSH-001)</option><option>Siti Rahmah (CSH-002)</option><option>Farid Hazwan (CSH-003)</option></select></div>
+        <button class="btn-full" id="dynGenBtn" onclick="generateDynQR()">Generate QR</button>
+      </div>
+    </div>
+    <div id="dynQRResult" style="display:none;padding:0 24px 24px;">
+      <div class="duitnow-card">
+        <div class="duitnow-header"><div class="duitnow-logo-text"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="none" stroke="white" stroke-width="2"/><path d="M9 8s1-1.5 3-1.5 3 1.5 3 3.5-1.5 3.5-3 3.5H9" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>DuitNow QR</div><div class="duitnow-type">Dynamic · Fixed Amount</div></div>
+        <div class="duitnow-qr-area">
+          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px;">Amount to pay</div><div style="display:flex;align-items:baseline;gap:4px;justify-content:center;margin-top:4px;"><span style="font-size:16px;font-weight:700;color:var(--txt);">RM</span><span style="font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--txt);" id="dynQRAmt">0.00</span></div></div>
+          <svg width="140" height="140" viewBox="0 0 180 180"><rect x="10" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="20" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="120" y="10" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="130" y="20" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="10" y="120" width="50" height="50" rx="4" fill="none" stroke="#DC2A54" stroke-width="4"/><rect x="20" y="130" width="30" height="30" fill="#DC2A54" rx="2"/><rect x="75" y="10" width="8" height="8" fill="#DC2A54"/><rect x="87" y="16" width="8" height="8" fill="#DC2A54"/><rect x="75" y="28" width="8" height="8" fill="#DC2A54"/><rect x="75" y="75" width="8" height="8" fill="#DC2A54"/><rect x="91" y="75" width="8" height="8" fill="#DC2A54"/><rect x="107" y="75" width="8" height="8" fill="#DC2A54"/><rect x="123" y="75" width="8" height="8" fill="#DC2A54"/><rect x="139" y="75" width="8" height="8" fill="#DC2A54"/><rect x="155" y="75" width="8" height="8" fill="#DC2A54"/><rect x="75" y="91" width="8" height="8" fill="#DC2A54"/><rect x="107" y="91" width="8" height="8" fill="#DC2A54"/><rect x="75" y="107" width="8" height="8" fill="#DC2A54"/><rect x="91" y="107" width="8" height="8" fill="#DC2A54"/><rect x="123" y="107" width="8" height="8" fill="#DC2A54"/><rect x="155" y="107" width="8" height="8" fill="#DC2A54"/></svg>
+          <div><div class="duitnow-merchant">Ampang Main Store</div><div class="duitnow-bank">Bank Islam · Ahmad Muaz</div></div>
+        </div>
+        <div style="background:#FFF8E6;padding:12px 18px;border-top:1px solid #F0F0F0;display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:#E6A817;"></div><span style="font-size:12px;color:#7A5C1E;font-weight:600;">This QR expires in <span id="dynExpiry">5:00</span></span></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;"><button class="pill pill-red" style="flex:1;justify-content:center;">Share QR</button><button class="pill pill-ghost" style="flex:1;justify-content:center;" onclick="resetDynQR()">New amount</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MORE ══════════════ -->
+<div class="screen" id="s-more">
+  <div class="sb"><span>9:41</span></div>
+  <div class="scr">
+    <div style="padding:12px 24px 24px;text-align:center;">
+      <div class="profile-avatar">AR</div>
+      <div style="font-size:20px;font-weight:900;letter-spacing:-0.4px;color:var(--txt);">Encik Ahmad Razif</div>
+      <div style="font-size:13px;color:var(--txt3);margin-top:3px;">Authorised Signatory</div>
+      <div style="display:inline-flex;align-items:center;gap:6px;background:#F5F5F5;border-radius:100px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--txt2);margin-top:10px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Razif Industries Sdn Bhd</div>
+    </div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Security</div>
+    <div class="set-group">
+      <div class="set-row"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="set-inf"><div class="set-nm">Change PIN</div><div class="set-sub">Last changed 30 days ago</div></div><span class="set-val">›</span></div>
+      <div class="set-row" onclick="showSoftToken('Pembinaan Jaya Sdn Bhd','75,000.00','IBG Transfer')"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="set-inf"><div class="set-nm">BIMB Secure</div><div class="set-sub">Device registered · Active</div></div><span class="list-badge lb-active" style="font-size:10px;">Active</span></div>
+      <div class="set-row"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="set-inf"><div class="set-nm">Biometric login</div><div class="set-sub">Face ID · Fingerprint</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><div class="set-inf"><div class="set-nm">Trusted devices</div><div class="set-sub">1 device registered</div></div><span class="set-val">›</span></div>
+    </div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Approvals &amp; Limits</div>
+    <div class="set-group">
+      <div class="set-row"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="set-inf"><div class="set-nm">Approval workflow</div><div class="set-sub">2 approvers · above RM 50,000.00</div></div><span class="set-val">›</span></div>
+      <div class="set-row"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="set-inf"><div class="set-nm">Daily transfer limit</div><div class="set-sub">RM 500,000.00 per day</div></div><span class="set-val">›</span></div>
+      <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#EAF3FD;"><svg viewBox="0 0 24 24" stroke="#1570B8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="set-inf"><div class="set-nm">Authorised signatories</div><div class="set-sub">3 users with approval rights</div></div><span class="set-val">›</span></div>
+    </div>
+    <div style="padding:0 24px 10px;font-size:13px;font-weight:800;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;">Notifications</div>
+    <div class="set-group">
+      <div class="set-row"><div class="set-ico" style="background:#F0EAFD;"><svg viewBox="0 0 24 24" stroke="#6B3FB5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div class="set-inf"><div class="set-nm">Transaction alerts</div><div class="set-sub">Push &amp; SMS for all transactions</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="set-row" style="border-bottom:none;"><div class="set-ico" style="background:#F5F5F5;"><svg viewBox="0 0 24 24" stroke="#666"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="set-inf"><div class="set-nm">E-statement delivery</div><div class="set-sub">ahmad@razif-industries.com</div></div><span class="set-val">›</span></div>
+    </div>
+    <div class="set-group">
+      <div class="set-row" style="cursor:pointer;"><div class="set-ico" style="background:var(--red-l);"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div><div class="set-inf"><div class="set-nm" style="color:var(--red);">Sign out</div></div></div>
+    </div>
+    <div style="text-align:center;padding:8px 24px 8px;">
+      <svg width="100" height="26" viewBox="0 0 260 64" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="46" font-family="Georgia,Times New Roman,serif" font-size="46" font-weight="700" fill="#58595B" letter-spacing="1">BANK</text>
+        <path d="M143 8 C143 8 128 16 128 32 C128 48 143 56 143 56 C143 56 108 50 108 32 C108 14 143 8 143 8Z" fill="#DC2A54"/>
+        <text x="150" y="46" font-family="Georgia,Times New Roman,serif" font-size="46" font-weight="700" fill="#58595B" letter-spacing="1">ISLAM</text>
+      </svg>
+      <div style="font-size:11px;color:var(--txt3);margin-top:2px;">ProMobile v2.1.0 · © 2025 Bank Islam Malaysia Berhad</div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <nav class="fnav">
+    <button class="fn" onclick="showScreen('s-home')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><span>Home</span></button>
+    <button class="fn" onclick="showScreen('s-accounts')"><div class="fn-bw"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M2 10h20M7 15h2M12 15h5"/></svg></div><span>Accounts</span></button>
+    <button class="fn" onclick="showScreen('s-approve')"><div class="fn-bw" style="position:relative;"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="fn-badge">3</div></div><span>Approve</span></button>
+    <button class="fn" onclick="showScreen('s-biz')"><div class="fn-bw"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7z"/><path d="M3 17l2 2 4-4"/></svg></div><span>Biz</span></button>
+    <button class="fn active"><div class="fn-bw"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span>More</span></button>
+  </nav>
+</div>
+
+</div><!-- end .phone -->
+
+<script>
+// ── NAVIGATION ──
+function showScreen(id){
+  document.querySelectorAll('.screen,.login-screen').forEach(s=>s.classList.remove('active'));
+  const t=document.getElementById(id);
+  if(t){
+    t.classList.add('active');
+    const sc=t.querySelector('.scr,.login-scroll,.st-scroll');
+    if(sc)sc.scrollTop=0;
+  }
+}
+
+// ── EYE TOGGLE ──
+const balances=['892,400.00','355,492.50'];
+const balanceHidden=['•••••••','•••••••'];
+const balVisible=[true,true];
+function toggleBalance(idx){
+  balVisible[idx]=!balVisible[idx];
+  const el=document.getElementById('balDisplay'+idx);
+  const eye=document.getElementById('eyeBtn'+idx);
+  if(balVisible[idx]){
+    el.innerHTML=`<span class="acct-card-bal-cur">RM</span><span class="acct-card-bal-num">${balances[idx]}</span>`;
+    eye.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  } else {
+    el.innerHTML=`<span class="acct-card-bal-cur">RM</span><span class="acct-card-bal-num" style="letter-spacing:3px;font-size:22px;">•••••••</span>`;
+    eye.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+  }
+}
+
+// ── DOTS ──
+function updateDots(){
+  const slider=document.getElementById('acctSlider');
+  if(!slider)return;
+  const idx=Math.round(slider.scrollLeft/(slider.scrollWidth/2));
+  [0,1].forEach(i=>{
+    const d=document.getElementById('dot'+i);
+    if(d){d.className='acct-dot'+(i===idx?' on':'');}
+  });
+}
+function showQR(type){showScreen(type==='static'?'s-qr-static':'s-qr-dynamic');}
+
+// ── TOTP sheet ──
+let tInt,tSec=30;
+function showTotp(rcp,amt){
+  document.getElementById('tRcp').textContent=rcp;
+  document.getElementById('tAmt').textContent=amt;
+  document.getElementById('totpOv').classList.add('show');
+  startTotp();
+}
+function dismissOv(e,id){if(e.target===document.getElementById(id)){clearInterval(tInt);document.getElementById(id).classList.remove('show');}}
+function startTotp(){
+  clearInterval(tInt);tSec=30;refreshTotpCode();
+  document.getElementById('tBar').style.width='100%';
+  tInt=setInterval(()=>{
+    tSec--;
+    document.getElementById('tTimer').textContent=tSec+'s';
+    document.getElementById('tBar').style.width=((tSec/30)*100)+'%';
+    if(tSec<=0){tSec=30;refreshTotpCode();}
+  },1000);
+}
+function refreshTotpCode(){
+  const ds=document.querySelectorAll('#tDigits .td');
+  const c=Math.floor(100000+Math.random()*900000).toString();
+  ds.forEach((d,i)=>{d.classList.add('flash');setTimeout(()=>{d.textContent=c[i];d.classList.remove('flash');},180);});
+}
+function confirmApproval(){clearInterval(tInt);document.getElementById('totpOv').classList.remove('show');document.getElementById('succScreen').classList.add('show');}
+function closeSucc(){document.getElementById('succScreen').classList.remove('show');}
+
+// ── SOFT TOKEN ──
+let stInt,stSec=30;
+const CIRC=2*Math.PI*35; // circumference of r=35
+
+function showSoftToken(payee,amt,type){
+  document.getElementById('stTxnName').textContent=payee;
+  document.getElementById('stTxnPayee').textContent=payee;
+  document.getElementById('stTxnType').textContent=type;
+  document.getElementById('stTxnAmtRaw').value=amt;
+  // amount display
+  const amtEl=document.getElementById('stTxnAmt');
+  amtEl.innerHTML=`<span style="font-size:13px;">RM</span>${amt}`;
+  document.getElementById('softToken').classList.add('show');
+  startSoftToken();
+}
+function hideSoftToken(){clearInterval(stInt);document.getElementById('softToken').classList.remove('show');}
+function startSoftToken(){
+  clearInterval(stInt);stSec=30;
+  refreshSoftCode();updateRing();
+  stInt=setInterval(()=>{
+    stSec--;
+    document.getElementById('stRingNum').textContent=stSec;
+    updateRing();
+    if(stSec<=0){stSec=30;refreshSoftCode();}
+  },1000);
+}
+function updateRing(){
+  const fill=document.getElementById('stRingFill');
+  const offset=CIRC-(stSec/30)*CIRC;
+  fill.style.strokeDashoffset=offset;
+}
+function refreshSoftCode(){
+  const ds=document.querySelectorAll('#stDigits .st-digit');
+  const c=Math.floor(100000+Math.random()*900000).toString();
+  ds.forEach((d,i)=>{d.classList.add('flash');setTimeout(()=>{d.textContent=c[i];d.classList.remove('flash');},180);});
+}
+
+// ── DYNAMIC QR ──
+let dynTimer;
+function updateDynAmt(){
+  const v=parseFloat(document.getElementById('dynAmtInput').value)||0;
+  document.getElementById('dynGenBtn').textContent=v>0?`Generate QR — RM ${v.toFixed(2)}`:'Generate QR';
+}
+function generateDynQR(){
+  const v=parseFloat(document.getElementById('dynAmtInput').value)||0;
+  if(v<=0){alert('Please enter an amount');return;}
+  document.getElementById('dynQRAmt').textContent=v.toFixed(2);
+  document.getElementById('dynAmtEntry').style.display='none';
+  document.getElementById('dynQRResult').style.display='block';
+  let secs=300;
+  clearInterval(dynTimer);
+  dynTimer=setInterval(()=>{secs--;const m=Math.floor(secs/60),s=secs%60;document.getElementById('dynExpiry').textContent=`${m}:${s.toString().padStart(2,'0')}`;if(secs<=0){clearInterval(dynTimer);resetDynQR();}},1000);
+}
+function resetDynQR(){
+  clearInterval(dynTimer);
+  document.getElementById('dynAmtInput').value='';
+  document.getElementById('dynAmtEntry').style.display='block';
+  document.getElementById('dynQRResult').style.display='none';
+  document.getElementById('dynGenBtn').textContent='Generate QR';
+}
+
+// Init ring
+document.getElementById('stRingFill').style.strokeDasharray=CIRC;
+document.getElementById('stRingFill').style.strokeDashoffset=0;
+</script>
+</body>
+</html>
